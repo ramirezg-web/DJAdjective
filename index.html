@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>DJ Adjective — Landing</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .track-card {
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 10px;
+        padding: 12px;
+        margin-bottom: 12px;
+      }
+      .track-thumb {
+        width: 120px;
+        height: 80px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 6px;
+      }
+      .gallery img {
+        max-width: 100%;
+        border-radius: 8px;
+        margin-bottom: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-dark"
+      style="background: linear-gradient(90deg, #081126, #1a0f2b)"
+    >
+      <a class="navbar-brand" href="/">DJ Adjective</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#nav"
+        aria-controls="#nav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ml-auto">
+          <!-- <li class="nav-item"><a class="nav-link" href="/">Home</a></li> -->
+          <li class="nav-item active">
+            <a class="nav-link" href="landing.html">Landing</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <header
+      class="py-5 text-center"
+      style="
+        background: linear-gradient(
+          180deg,
+          rgba(99, 102, 241, 0.06),
+          transparent
+        );
+      "
+    >
+      <div class="container">
+        <h1 class="display-4">DJ Adjective</h1>
+        <p class="lead muted">
+          Blends of hip hop, R&amp;B, pop & neosoul — pick a mix and press play
+        </p>
+      </div>
+    </header>
+
+    <main class="container py-4">
+      <div class="row">
+        <div class="col-lg-8">
+          <h3>Mixes</h3>
+          <div
+            style="
+              display: flex;
+              gap: 12px;
+              align-items: center;
+              flex-wrap: wrap;
+            "
+          >
+            <audio
+              id="featuredPlayer"
+              controls
+              preload="none"
+              style="min-width: 240px"
+            >
+              <source src="JT.Jamie.m4a" type="audio/mp4" />
+              Your browser does not support the audio element.
+            </audio>
+            <a id="featuredDownload" class="btn" href="JT.Jamie.m4a" download
+              >Download JT.Jamie.m4a</a
+            >
+            <audio
+              id="featuredPlayer"
+              controls
+              preload="none"
+              style="min-width: 240px"
+            >
+              <source src="BadBloodNao+Chrisette.m4a" type="audio/mp4" />
+              Your browser does not support the audio element.
+            </audio>
+            <a
+              id="featuredDownload"
+              class="btn"
+              href="public/BadBloodNao+Chrisette.m4a"
+              download
+              >Download Nao+Chrisette.m4a</a
+            >
+            <audio
+              id="featuredPlayer"
+              controls
+              preload="none"
+              style="min-width: 240px"
+            >
+              <source src="KURN+ Maxwell.m4a" type="audio/mp4" />
+              Your browser does not support the audio element.
+            </audio>
+            <a
+              id="featuredDownload"
+              class="btn"
+              href="KURN+ Maxwell.m4a"
+              download
+              >Maxwell + Kiss You Right Now</a
+            >
+            <audio
+              id="featuredPlayer"
+              controls
+              preload="none"
+              style="min-width: 240px"
+            >
+              <source src="KYRN.Twenties.m4a" type="audio/mp4" />
+              Your browser does not support the audio element.
+            </audio>
+            <a
+              id="featuredDownload"
+              class="btn"
+              href="KYRN.Twenties.m4a"
+              download
+              >Kiss You Right Now + Twenties</a
+            >
+            <audio
+              id="featuredPlayer"
+              controls
+              preload="none"
+              style="min-width: 240px"
+            >
+              <source
+                src="u got it bad+ papers (baseline).m4a"
+                type="audio/mp4"
+              />
+              Your browser does not support the audio element.
+            </audio>
+            <a
+              id="featuredDownload"
+              class="btn"
+              href="u got it bad+ papers (baseline).m4a"
+              download
+              >U got it bad + Papers Baseline</a
+            >
+            <audio
+              id="featuredPlayer"
+              controls
+              preload="none"
+              style="min-width: 240px"
+            >
+              <source
+                src="very special + sweet thang MJB.m4a"
+                type="audio/mp4"
+              />
+              Your browser does not support the audio element.
+            </audio>
+            <a
+              id="featuredDownload"
+              class="btn"
+              href="very special + sweet thang MJB.m4a"
+              download
+              >Very Special + Sweet thang MJB</a
+            >
+            <audio
+              id="featuredPlayer"
+              controls
+              preload="none"
+              style="min-width: 240px"
+            >
+              <source src="papers + u got it bad.m4a" type="audio/mp4" />
+              Your browser does not support the audio element.
+            </audio>
+            <a
+              id="featuredDownload"
+              class="btn"
+              href="papers + u got it bad.m4a"
+              download
+              >Download Papers + U Got It Bad</a
+            >
+
+            <audio
+              id="featuredPlayer"
+              controls
+              preload="none"
+              style="min-width: 240px"
+            >
+              <source src="TPain + Twista.m4a" type="audio/mp4" />
+              Your browser does not support the audio element.
+            </audio>
+            <a
+              id="featuredDownload"
+              class="btn"
+              href="TPain + Twista.m4a"
+              download
+              >Twista + T Pain + Raymond</a
+            >
+            <audio
+              id="featuredPlayer"
+              controls
+              preload="none"
+              style="min-width: 240px"
+            >
+              <source src="bwithoutyou+ Whitney.m4a" type="audio/mp4" />
+              Your browser does not support the audio element.
+            </audio>
+            <a
+              id="featuredDownload"
+              class="btn"
+              href="bwithoutyou+ Whitney.m4a"
+              download
+              >Be Without You + Whitney</a
+            >
+            <audio
+              id="featuredPlayer"
+              controls
+              preload="none"
+              style="min-width: 240px"
+            >
+              <source src="flamingHottie+KittyMeg.m4a" type="audio/mp4" />
+              Your browser does not support the audio element.
+            </audio>
+            <a
+              id="featuredDownload"
+              class="btn"
+              href="flamingHottie+KittyMeg.m4a"
+              download
+              >Megan Thee Stallion flamingHottie + Kitty Kat</a
+            >
+            <audio
+              id="featuredPlayer"
+              controls
+              preload="none"
+              style="min-width: 240px"
+            >
+              <source
+                src="be without you- im going down.m4a"
+                type="audio/mp4"
+              />
+              Your browser does not support the audio element.
+            </audio>
+            <a
+              id="featuredDownload"
+              class="btn"
+              href="be without you- im going down.m4a"
+              download
+              >Be Without You - I'm Going Down MJB</a
+            >
+            <audio
+              id="featuredPlayer"
+              controls
+              preload="none"
+              style="min-width: 240px"
+            >
+              <source
+                src="BeWithYouMJB+AllTheManINeedWhitney.m4a"
+                type="audio/mp4"
+              />
+              Your browser does not support the audio element.
+            </audio>
+            <a
+              id="featuredDownload"
+              class="btn"
+              href="BeWithYouMJB+AllTheManINeedWhitney.m4a"
+              download
+              >Be Without You MJB + All The Man I Need</a
+            >
+
+            <audio
+              id="featuredPlayer"
+              controls
+              preload="none"
+              style="min-width: 240px"
+            >
+              <source src="ugotitbad+suffocate.m4a" type="audio/mp4" />
+              Your browser does not support the audio element.
+            </audio>
+            <a
+              id="featuredDownload"
+              class="btn"
+              href="ugotitbad+suffocate.m4a"
+              download
+              >U got it bad + Suffocate</a
+            >
+          </div>
+
+          <!-- Hard-coded video block -->
+          <div
+            class="controls"
+            style="
+              margin-top: 12px;
+              display: flex;
+              gap: 12px;
+              align-items: center;
+              flex-wrap: wrap;
+            "
+          ></div>
+
+          <div id="tracksList"></div>
+        </div>
+        <aside class="col-lg-4">
+          <h5>Gallery</h5>
+          <div class="gallery mb-3">
+            <img src="IMG_2288.jpg" alt="photo 1" />
+            <img src="image3.png" alt="photo 2" />
+            <img src="image4.jpg" alt="photo 3" />
+            <img src="image2.png" alt="photo 2" />
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer
+      class="text-center py-4 muted"
+      style="border-top: 1px solid rgba(255, 255, 255, 0.03)"
+    >
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          flex-wrap: wrap;
+        "
+      >
+        <span>Made by DJ Adjective — 2025</span>
+        <a
+          href="https://instagram.com/agentleproduction"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+          style="
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: inherit;
+            text-decoration: none;
+          "
+        >
+          <!-- small Instagram SVG -->
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <rect
+              x="3"
+              y="3"
+              width="18"
+              height="18"
+              rx="5"
+              stroke="currentColor"
+              stroke-width="1.2"
+            />
+            <path
+              d="M16 11.98a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"
+              stroke="currentColor"
+              stroke-width="1.2"
+              fill="none"
+            />
+            <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" />
+          </svg>
+          <span>@agentleproduction</span>
+        </a>
+      </div>
+    </footer>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
