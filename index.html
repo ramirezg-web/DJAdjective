@@ -29,6 +29,20 @@
         border-radius: 8px;
         margin-bottom: 8px;
       }
+      /* Class-based styles to fix the duplicate ID violations */
+      .mix-container {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.01);
+        border-radius: 8px;
+      }
+      .mix-player {
+        min-width: 240px;
+      }
     </style>
   </head>
   <body>
@@ -42,7 +56,7 @@
         type="button"
         data-toggle="collapse"
         data-target="#nav"
-        aria-controls="#nav"
+        aria-controls="nav"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
@@ -51,7 +65,6 @@
 
       <div class="collapse navbar-collapse" id="nav">
         <ul class="navbar-nav ml-auto">
-          <!-- <li class="nav-item"><a class="nav-link" href="/">Home</a></li> -->
           <li class="nav-item active">
             <a class="nav-link" href="landing.html">Landing</a>
           </li>
@@ -71,8 +84,8 @@
     >
       <div class="container">
         <h1 class="display-4">DJ Adjective</h1>
-        <p class="lead muted">
-          Blends of hip hop, R&amp;B, pop & neosoul — pick a mix and press play
+        <p class="lead text-muted">
+          Blends of hip hop, R&amp;B, pop &amp; neosoul — pick a mix and press play
         </p>
       </div>
     </header>
@@ -80,597 +93,280 @@
     <main class="container py-4">
       <div class="row">
         <div class="col-lg-8">
-          <h3>Mixes</h3>
-          <div
-            style="
-              display: flex;
-              gap: 12px;
-              align-items: center;
-              flex-wrap: wrap;
-            "
-          >
+          <h3 class="mb-4">Mixes</h3>
 
-            <a
-              id="featuredDownload"
-              class="btn"
-              href="ring off.m4a"
-              download
-              >Ring Off Mix</a
-            >
-
-                <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
-              <source src="ring off.m4a".m4a" type="audio/mp4" /> Your
-              browser does not support the audio element.
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="ring off.m4a" download>Ring Off Mix</a>
+            <audio class="mix-player" controls preload="none">
+              <source src="ring off.m4a" type="audio/mp4" />
+              Your browser does not support the audio element.
             </audio>
+          </div>
 
-            <a
-              id="featuredDownload"
-              class="btn"
-              href="perfect12.23.m4a"
-              download
-              >Dec 23 25 Mix</a
-            >
-
-                <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
-              <source src="perfect12.23.m4a" type="audio/mp4" /> Your
-              browser does not support the audio element.
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="perfect12.23.m4a" download>Dec 23 25 Mix</a>
+            <audio class="mix-player" controls preload="none">
+              <source src="perfect12.23.m4a" type="audio/mp4" />
+              Your browser does not support the audio element.
             </audio>
-            
-    <a
-              id="featuredDownload"
-              class="btn"
-              href="hour1.3.m4a"
-              download
-              >Gen X Old School Mix 1- 15 mins Mix</a
-            >
-
-                <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
-              <source src="hour1.3.m4a".m4a" type="audio/mp4" /> Your
-              browser does not support the audio element.
-            </audio>
-    
-   <a
-              id="featuredDownload"
-              class="btn"
-              href="hourlong2.3.m4a"
-              download
-              >Gen X Old School Mix Part 2 Mix</a
-            >
-
-                <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
-              <source src="hourlong2.3.m4a".m4a" type="audio/mp4" /> Your
-              browser does not support the audio element.
-            </audio>
-
-               <a
-              id="featuredDownload"
-              class="btn"
-              href="hourlong3.3.m4a"
-              download
-              >Gen X Old School Mix 3 Mix</a
-            >
-                <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
-              <source src="hourlong3.3.m4a".m4a" type="audio/mp4" /> Your
-              browser does not support the audio element.
-            </audio>
-
-
-            
-               <a
-              id="featuredDownload"
-              class="btn"
-              href="country.m4a"
-              download
-              >Country </a
-            >
-                <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
-              <source src="country.m4a".m4a" type="audio/mp4" /> Your
-              browser does not support the audio element.
-            </audio>
-            
-              
-
-              <a
-              id="featuredDownload"
-              class="btn"
-              href="countrypart2.m4a"
-              download
-              >Country part 2</a
-            >
-                <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
-              <source src="countrypart2.m4a".m4a" type="audio/mp4" /> Your
-              browser does not support the audio element.
-            </audio>
-            
-            
-              <a
-              id="featuredDownload"
-              class="btn"
-              href="stairmasterpt1.m4a"
-              download
-              >Gym/Dance/Workout part 1- 15 mins Mix</a
-            >
+          </div>
           
-            <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
-              <source src="stairmasterpt1.m4a".m4a" type="audio/mp4" /> Your
-              browser does not support the audio element.
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="hour1.3.m4a" download>Gen X Old School Mix 1 - 15 mins Mix</a>
+            <audio class="mix-player" controls preload="none">
+              <source src="hour1.3.m4a" type="audio/mp4" />
+              Your browser does not support the audio element.
             </audio>
+          </div>
+          
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="hourlong2.3.m4a" download>Gen X Old School Mix Part 2 Mix</a>
+            <audio class="mix-player" controls preload="none">
+              <source src="hourlong2.3.m4a" type="audio/mp4" />
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="hourlong3.3.m4a" download>Gen X Old School Mix 3 Mix</a>
+            <audio class="mix-player" controls preload="none">
+              <source src="hourlong3.3.m4a" type="audio/mp4" />
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="country.m4a" download>Country</a>
+            <audio class="mix-player" controls preload="none">
+              <source src="country.m4a" type="audio/mp4" />
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="countrypart2.m4a" download>Country part 2</a>
+            <audio class="mix-player" controls preload="none">
+              <source src="countrypart2.m4a" type="audio/mp4" />
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+          
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="stairmasterpt1.m4a" download>Gym/Dance/Workout part 1 - 15 mins Mix</a>
+            <audio class="mix-player" controls preload="none">
+              <source src="stairmasterpt1.m4a" type="audio/mp4" />
+              Your browser does not support the audio element.
+            </audio>
+          </div>
          
- <a
-              id="featuredDownload"
-              class="btn"
-              href="stairmasterpt2.m4a"
-              download
-              >Gym/Dance/Workout part 2- 15 mins Mix</a
-            >
-            <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
-              <source src="stairmasterpt2.m4a".m4a" type="audio/mp4" /> Your
-              browser does not support the audio element.
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="stairmasterpt2.m4a" download>Gym/Dance/Workout part 2 - 15 mins Mix</a>
+            <audio class="mix-player" controls preload="none">
+              <source src="stairmasterpt2.m4a" type="audio/mp4" />
+              Your browser does not support the audio element.
             </audio>
+          </div>
            
- <a id="featuredDownload" class="btn" href="14mins.m4a" download
-              >Winter Solstice 1 - 14 mins Mix</a
-            >
-
-            <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
-              <source src="14mins.m4a".m4a" type="audio/mp4" /> Your browser
-              does not support the audio element.
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="14mins.m4a" download>Winter Solstice 1 - 14 mins Mix</a>
+            <audio class="mix-player" controls preload="none">
+              <source src="14mins.m4a" type="audio/mp4" />
+              Your browser does not support the audio element.
             </audio>
+          </div>
 
-
-             <a id="featuredDownload" class="btn" href="mix15.m4a" download
-              >Winter Solstice 2- 15 mins Mix</a
-            >
-            <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
-              <source src="mix15.m4a".m4a" type="audio/mp4" /> Your browser does
-              not support the audio element.
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="mix15.m4a" download>Winter Solstice 2 - 15 mins Mix</a>
+            <audio class="mix-player" controls preload="none">
+              <source src="mix15.m4a" type="audio/mp4" />
+              Your browser does not support the audio element.
             </audio>
+          </div>
            
-            <a id="featuredDownload" class="btn" href="mix6.m4a" download
-              >Winter Solstice 3- 6 mins Mix</a
-            >
-            <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
-              <source src="mix6.m4a".m4a" type="audio/mp4" /> Your browser does
-              not support the audio element.
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="mix6.m4a" download>Winter Solstice 3 - 6 mins Mix</a>
+            <audio class="mix-player" controls preload="none">
+              <source src="mix6.m4a" type="audio/mp4" />
+              Your browser does not support the audio element.
             </audio>
-          
+          </div>
 
-            <a id="featuredDownload" class="btn" href="JT.Jamie.m4a" download
-              >Download JT.Jamie.m4a</a
-            >
-            <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="JT.Jamie.m4a" download>Download JT.Jamie.m4a</a>
+            <audio class="mix-player" controls preload="none">
               <source src="JT.Jamie.m4a" type="audio/mp4" />
               Your browser does not support the audio element.
             </audio>
-            
-            <a
-              id="featuredDownload"
-              class="btn"
-              href="public/BadBloodNao+Chrisette.m4a"
-              download
-              >Download Nao+Chrisette.m4a</a
-            >
-            <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
+          </div>
+          
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="public/BadBloodNao+Chrisette.m4a" download>Download Nao+Chrisette.m4a</a>
+            <audio class="mix-player" controls preload="none">
               <source src="BadBloodNao+Chrisette.m4a" type="audio/mp4" />
               Your browser does not support the audio element.
             </audio>
-            
-            <a
-              id="featuredDownload"
-              class="btn"
-              href="KURN+ Maxwell.m4a"
-              download
-              >Maxwell + Kiss You Right Now</a
-            >
-            <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
+          </div>
+          
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="KURN+ Maxwell.m4a" download>Maxwell + Kiss You Right Now</a>
+            <audio class="mix-player" controls preload="none">
               <source src="KURN+ Maxwell.m4a" type="audio/mp4" />
               Your browser does not support the audio element.
             </audio>
-            
-            <a
-              id="featuredDownload"
-              class="btn"
-              href="KYRN.Twenties.m4a"
-              download
-              >Kiss You Right Now + Twenties</a
-            >
-            <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
+          </div>
+          
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="KYRN.Twenties.m4a" download>Kiss You Right Now + Twenties</a>
+            <audio class="mix-player" controls preload="none">
               <source src="KYRN.Twenties.m4a" type="audio/mp4" />
               Your browser does not support the audio element.
             </audio>
-            
-            <a
-              id="featuredDownload"
-              class="btn"
-              href="u got it bad+ papers (baseline).m4a"
-              download
-              >U got it bad + Papers Baseline</a
-            >
-            <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
-              <source
-                src="u got it bad+ papers (baseline).m4a"
-                type="audio/mp4"
-              />
+          </div>
+          
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="u got it bad+ papers (baseline).m4a" download>U got it bad + Papers Baseline</a>
+            <audio class="mix-player" controls preload="none">
+              <source src="u got it bad+ papers (baseline).m4a" type="audio/mp4" />
               Your browser does not support the audio element.
             </audio>
-            
-            <a
-              id="featuredDownload"
-              class="btn"
-              href="very special + sweet thang MJB.m4a"
-              download
-              >Very Special + Sweet thang MJB</a
-            >
-            <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
-              <source
-                src="very special + sweet thang MJB.m4a"
-                type="audio/mp4"
-              />
+          </div>
+          
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="very special + sweet thang MJB.m4a" download>Very Special + Sweet thang MJB</a>
+            <audio class="mix-player" controls preload="none">
+              <source src="very special + sweet thang MJB.m4a" type="audio/mp4" />
               Your browser does not support the audio element.
             </audio>
-            
-            <a
-              id="featuredDownload"
-              class="btn"
-              href="papers + u got it bad.m4a"
-              download
-              >Download Papers + U Got It Bad</a
-            >
-            <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
+          </div>
+          
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="papers + u got it bad.m4a" download>Download Papers + U Got It Bad</a>
+            <audio class="mix-player" controls preload="none">
               <source src="papers + u got it bad.m4a" type="audio/mp4" />
               Your browser does not support the audio element.
             </audio>
-            
+          </div>
+          
 
-            <a
-              id="featuredDownload"
-              class="btn"
-              href="TPain + Twista.m4a"
-              download
-              >Twista + T Pain + Raymond</a
-            >
-            <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="TPain + Twista.m4a" download>Twista + T Pain + Raymond</a>
+            <audio class="mix-player" controls preload="none">
               <source src="TPain + Twista.m4a" type="audio/mp4" />
               Your browser does not support the audio element.
             </audio>
-            
-            <a
-              id="featuredDownload"
-              class="btn"
-              href="bwithoutyou+ Whitney.m4a"
-              download
-              >Be Without You + Whitney</a
-            >
-            <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
+          </div>
+          
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="bwithoutyou+ Whitney.m4a" download>Be Without You + Whitney</a>
+            <audio class="mix-player" controls preload="none">
               <source src="bwithoutyou+ Whitney.m4a" type="audio/mp4" />
               Your browser does not support the audio element.
             </audio>
-            
-            <a
-              id="featuredDownload"
-              class="btn"
-              href="flamingHottie+KittyMeg.m4a"
-              download
-              >Megan Thee Stallion flamingHottie + Kitty Kat</a
-            >
-            <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
+          </div>
+          
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="flamingHottie+KittyMeg.m4a" download>Megan Thee Stallion flamingHottie + Kitty Kat</a>
+            <audio class="mix-player" controls preload="none">
               <source src="flamingHottie+KittyMeg.m4a" type="audio/mp4" />
               Your browser does not support the audio element.
             </audio>
-            
-            <a
-              id="featuredDownload"
-              class="btn"
-              href="be without you- im going down.m4a"
-              download
-              >Be Without You - I'm Going Down MJB</a
-            >
-            <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
-              <source
-                src="be without you- im going down.m4a"
-                type="audio/mp4"
-              />
+          </div>
+          
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="be without you- im going down.m4a" download>Be Without You - I'm Going Down MJB</a>
+            <audio class="mix-player" controls preload="none">
+              <source src="be without you- im going down.m4a" type="audio/mp4" />
               Your browser does not support the audio element.
             </audio>
-            
-            <a
-              id="featuredDownload"
-              class="btn"
-              href="BeWithYouMJB+AllTheManINeedWhitney.m4a"
-              download
-              >Be Without You MJB + All The Man I Need</a
-            >
-            <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
-              <source
-                src="BeWithYouMJB+AllTheManINeedWhitney.m4a"
-                type="audio/mp4"
-              />
+          </div>
+          
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="BeWithYouMJB+AllTheManINeedWhitney.m4a" download>Be Without You MJB + All The Man I Need</a>
+            <audio class="mix-player" controls preload="none">
+              <source src="BeWithYouMJB+AllTheManINeedWhitney.m4a" type="audio/mp4" />
               Your browser does not support the audio element.
             </audio>
-            
+          </div>
+          
 
-            <a
-              id="featuredDownload"
-              class="btn"
-              href="goodenoughciarapromise.m4a"
-              download
-              >Ciara + J.S Good Enough</a
-            >
-            <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="goodenoughciarapromise.m4a" download>Ciara + J.S Good Enough</a>
+            <audio class="mix-player" controls preload="none">
               <source src="goodenoughciarapromise.m4a" type="audio/mp4" />
               Your browser does not support the audio element.
             </audio>
-            
+          </div>
+          
 
-            <a
-              id="featuredDownload"
-              class="btn"
-              href="theregoesmybabycharlieusher.m4a"
-              download
-              >There Goes My Baby - Charlie Wilson + Usher Baseline</a
-            >
-            <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="theregoesmybabycharlieusher.m4a" download>There Goes My Baby - Charlie Wilson + Usher Baseline</a>
+            <audio class="mix-player" controls preload="none">
               <source src="theregoesmybabycharlieusher.m4a" type="audio/mp4" />
               Your browser does not support the audio element.
             </audio>
-            
+          </div>
+          
 
-            <a
-              id="featuredDownload"
-              class="btn"
-              href="theregoesmybabyushercharliewilson.m4a"
-              download
-              >There Goes My Baby Usher + Charlie Wilson Baseline</a
-            >
-            <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
-              <source
-                src="theregoesmybabyushercharliewilson.m4a"
-                type="audio/mp4"
-              />
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="theregoesmybabyushercharliewilson.m4a" download>There Goes My Baby Usher + Charlie Wilson Baseline</a>
+            <audio class="mix-player" controls preload="none">
+              <source src="theregoesmybabyushercharliewilson.m4a" type="audio/mp4" />
               Your browser does not support the audio element.
             </audio>
-            
+          </div>
+          
 
-            <a
-              id="featuredDownload"
-              class="btn"
-              href="charliewilsonbewithoutyouMJBbewithoutyou.m4a"
-              download
-              >Charlie Wilson + Be Without You MJB</a
-            >
-            <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
-              <source
-                src="charliewilsonbewithoutyouMJBbewithoutyou.m4a"
-                type="audio/mp4"
-              />
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="charliewilsonbewithoutyouMJBbewithoutyou.m4a" download>Charlie Wilson + Be Without You MJB</a>
+            <audio class="mix-player" controls preload="none">
+              <source src="charliewilsonbewithoutyouMJBbewithoutyou.m4a" type="audio/mp4" />
               Your browser does not support the audio element.
             </audio>
-            
-            
-            <a
-              id="featuredDownload"
-              class="btn"
-              href="nastyWorkUgotItbad.m4a"
-              download
-              >Nasty Work + Usher U Got It Bad</a
-            >
-            <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
+          </div>
+          
+          
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="nastyWorkUgotItbad.m4a" download>Nasty Work + Usher U Got It Bad</a>
+            <audio class="mix-player" controls preload="none">
               <source src="nastyWorkUgotItbad.m4a" type="audio/mp4" />
               Your browser does not support the audio element.
             </audio>
-           
+          </div>
+          
 
-            <a
-              id="featuredDownload"
-              class="btn"
-              href="goodenoughciara.m4a"
-              download
-              >Good Enough + Ciara Promise</a
-            >
-            <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="goodenoughciara.m4a" download>Good Enough + Ciara Promise</a>
+            <audio class="mix-player" controls preload="none">
               <source src="goodenoughciara.m4a" type="audio/mp4" />
               Your browser does not support the audio element.
             </audio>
-            
+          </div>
+          
 
-                <a
-              id="featuredDownload"
-              class="btn"
-              href="ugotitbad+suffocate.m4a"
-              download
-              >U got it bad + Suffocate</a
-            >
-            <audio
-              id="featuredPlayer"
-              controls
-              preload="none"
-              style="min-width: 240px"
-            >
+          <div class="mix-container">
+            <a class="btn btn-outline-light" href="ugotitbad+suffocate.m4a" download>U got it bad + Suffocate</a>
+            <audio class="mix-player" controls preload="none">
               <source src="ugotitbad+suffocate.m4a" type="audio/mp4" />
               Your browser does not support the audio element.
             </audio>
-        
           </div>
-
-          <!-- Hard-coded video block -->
-          <div
-            class="controls"
-            style="
-              margin-top: 12px;
-              display: flex;
-              gap: 12px;
-              align-items: center;
-              flex-wrap: wrap;
-            "
-          ></div>
-
-          <div id="tracksList"></div>
         </div>
+
         <aside class="col-lg-4">
-          <h5>Gallery</h5>
+          <h5 class="mb-3">Gallery</h5>
           <div class="gallery mb-3">
-            <img src="IMG_2288.jpg" alt="photo 1" />
-            <img src="IMG_0351.jpg" alt="photo 1" />
-            <img src="image3.png" alt="photo 2" />
-            <img src="image4.jpg" alt="photo 3" />
-            <img src="image2.png" alt="photo 2" />
+            <img src="IMG_2288.jpg" alt="DJ Set Performance" />
+            <img src="IMG_0351.jpg" alt="Travel Pedigree" />
+            <img src="image3.png" alt="Event Set" />
+            <img src="image4.jpg" alt="Behind the Booth" />
+            <img src="image2.png" alt="Creative Space" />
           </div>
         </aside>
       </div>
     </main>
 
     <footer
-      class="text-center py-4 muted"
+      class="text-center py-4 text-muted"
       style="border-top: 1px solid rgba(255, 255, 255, 0.03)"
     >
       <div
@@ -696,7 +392,6 @@
             text-decoration: none;
           "
         >
-          <!-- small Instagram SVG -->
           <svg
             width="20"
             height="20"
