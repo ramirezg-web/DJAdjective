@@ -95,6 +95,29 @@
       .mix-player {
         min-width: 240px;
       }
+      .tracklist-toggle {
+        font-size: 12px;
+      }
+      .tracklist {
+        width: 100%;
+        margin-top: 8px;
+        padding-top: 8px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .tracklist-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 14px;
+        color: #d8e0f0;
+      }
+      .tracklist-list li {
+        padding: 3px 0;
+      }
+      .tracklist-list li::before {
+        content: "\266A  ";
+        opacity: 0.5;
+      }
     </style>
   </head>
   <body>
@@ -170,8 +193,28 @@
               <source src="Scuba1.m4a" type="audio/mp4" />
               Your browser does not support the audio element.
             </audio>
+            <button
+              class="btn btn-sm btn-outline-secondary tracklist-toggle"
+              type="button"
+              data-toggle="collapse"
+              data-target="#tracklist-scuba1"
+              aria-expanded="false"
+              aria-controls="tracklist-scuba1"
+            >
+              Songs in this mix &#9662;
+            </button>
+            <div class="collapse tracklist" id="tracklist-scuba1">
+              <ul class="tracklist-list">
+                <li>Practice What You Preach — Barry White</li>
+                <li>Tell Me What You Want — Dru Hill</li>
+                <li>My Body — LSG</li>
+                <li>Age Ain't Nothing But a Number — Pretty Ricky</li>
+                <li>Read Your Mind — Avant</li>
+                <li>TwentyForePlay — Janet Jackson</li>
+              </ul>
+            </div>
           </div>
-                 <div class="mix-container">
+          <div class="mix-container">
             <a class="btn btn-outline-light" href="Scuba2.m4a" download
               >Scuba Deep Sea Diver Retrograde Mix part 2</a
             >
@@ -179,6 +222,26 @@
               <source src="Scuba2.m4a" type="audio/mp4" />
               Your browser does not support the audio element.
             </audio>
+            <button
+              class="btn btn-sm btn-outline-secondary tracklist-toggle"
+              type="button"
+              data-toggle="collapse"
+              data-target="#tracklist-scuba2"
+              aria-expanded="false"
+              aria-controls="tracklist-scuba2"
+            >
+              Songs in this mix &#9662;
+            </button>
+            <div class="collapse tracklist" id="tracklist-scuba2">
+              <ul class="tracklist-list">
+                <li>On the Hotline — Pretty Ricky</li>
+                <li>Lovers &amp; Friends — Usher &amp; Lil Jon</li>
+                <li>BPW — Jazmine Sullivan</li>
+                <li>Choke — Ari Lennox</li>
+                <li>Girls Need Love — Summer Walker</li>
+                <li>None of Your Friends' Business — Ginuwine</li>
+              </ul>
+            </div>
           </div>
 
           <div class="mix-container">
@@ -189,6 +252,31 @@
               <source src="redo 752026.m4a" type="audio/mp4" />
               Your browser does not support the audio element.
             </audio>
+            <button
+              class="btn btn-sm btn-outline-secondary tracklist-toggle"
+              type="button"
+              data-toggle="collapse"
+              data-target="#tracklist-cyber"
+              aria-expanded="false"
+              aria-controls="tracklist-cyber"
+            >
+              Songs in this mix &#9662;
+            </button>
+            <div class="collapse tracklist" id="tracklist-cyber">
+              <ul class="tracklist-list">
+                <li>Bound 2 — Kanye West &amp; Charlie Wilson</li>
+                <li>Download — Lil' Kim, T-Pain &amp; Charlie Wilson</li>
+                <li>Like That — Memphis Bleek feat. Swizz Beatz</li>
+                <li>Treat 'Em Right — Lil Wayne</li>
+                <li>Just Right (Remix) — Mary J. Blige</li>
+                <li>Fancy — Drake &amp; Mary J. Blige</li>
+                <li>Mr. Wrong — Mary J. Blige &amp; Drake</li>
+                <li>Throw It in the Bag — Fabolous</li>
+                <li>Wipe Me Down — Boosie Badazz</li>
+                <li>Set It Off — Juvenile</li>
+                <li>B.B.B. — Juvenile &amp; Megan Thee Stallion</li>
+              </ul>
+            </div>
           </div>
 
           <div class="mix-container">
