@@ -3,1121 +3,1914 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>DJ Adjective — Landing</title>
+    <title>DJ Adjective</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap"
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-      crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="styles.css" />
     <style>
-      .track-card {
-        background: rgba(255, 255, 255, 0.02);
-        border-radius: 10px;
-        padding: 12px;
-        margin-bottom: 12px;
+      :root {
+        --bg: #000;
+        --panel: #121212;
+        --panel-2: #181818;
+        --hover: #1f1f1f;
+        --hover-2: #2a2a2a;
+        --text: #fff;
+        --muted: #b3b3b3;
+        --subtle: #727272;
+        --green: #1ed760;
+        --green-dark: #1db954;
+        --radius: 8px;
+        --player-h: 90px;
       }
-      .track-thumb {
-        width: 120px;
-        height: 80px;
-        background-size: cover;
-        background-position: center;
-        border-radius: 6px;
+      * {
+        box-sizing: border-box;
       }
-      .gallery-grid {
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family:
+          "Figtree",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        font-size: 14px;
+        overflow: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button {
+        font: inherit;
+        color: inherit;
+        background: none;
+        border: 0;
+        cursor: pointer;
+        padding: 0;
+      }
+      svg {
+        display: block;
+        fill: currentColor;
+      }
+
+      /* ---------- App shell ---------- */
+      .app {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        gap: 14px;
+        grid-template-columns: 300px 1fr;
+        grid-template-rows: 1fr var(--player-h);
+        gap: 8px;
+        height: 100vh;
+        height: 100dvh;
+        padding: 8px 8px 0;
       }
-      .gallery-item {
+
+      /* ---------- Sidebar ---------- */
+      .sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        min-height: 0;
+      }
+      .side-box {
+        background: var(--panel);
+        border-radius: var(--radius);
+        padding: 8px 12px;
+      }
+      .side-nav a,
+      .side-nav label {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 12px;
+        font-weight: 700;
+        font-size: 16px;
+        color: var(--muted);
+        transition: color 0.2s;
+        cursor: pointer;
+      }
+      .side-nav a:hover,
+      .side-nav label:hover,
+      .side-nav .active {
+        color: var(--text);
+      }
+      .side-nav svg {
+        width: 24px;
+        height: 24px;
+      }
+      .library {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        padding: 8px;
+      }
+      .library-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 8px 12px;
+        color: var(--muted);
+        font-weight: 700;
+        font-size: 16px;
+      }
+      .library-head svg {
+        width: 24px;
+        height: 24px;
+      }
+      .search-wrap {
+        position: relative;
+        margin: 0 8px 8px;
+      }
+      .search-wrap svg {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+        color: var(--muted);
+      }
+      .search {
+        width: 100%;
+        background: var(--hover-2);
+        border: 0;
+        border-radius: 4px;
+        padding: 8px 10px 8px 34px;
+        color: var(--text);
+        font: inherit;
+        outline: none;
+      }
+      .search:focus {
+        box-shadow: 0 0 0 2px #fff;
+      }
+      .library-list {
+        overflow-y: auto;
+        flex: 1;
+      }
+      .lib-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px;
+        border-radius: 6px;
+        cursor: pointer;
+        width: 100%;
+        text-align: left;
+      }
+      .lib-item:hover {
+        background: var(--hover);
+      }
+      .lib-item.is-current {
+        background: var(--hover-2);
+      }
+      .lib-item .cover {
+        width: 48px;
+        height: 48px;
+        flex: none;
+      }
+      .lib-meta {
+        min-width: 0;
+      }
+      .lib-title {
+        font-size: 15px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .is-current .lib-title {
+        color: var(--green);
+      }
+      .lib-sub {
+        color: var(--muted);
+        font-size: 13px;
+        margin-top: 2px;
+      }
+
+      /* ---------- Cover art (generated) ---------- */
+      .cover {
+        border-radius: 4px;
         position: relative;
         overflow: hidden;
-        border-radius: 12px;
-        aspect-ratio: 4 / 5;
-        cursor: pointer;
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-        background: #0b1320;
+        background: var(--c, #333);
+        display: flex;
+        align-items: flex-end;
+        padding: 6px;
+        font-weight: 800;
+        line-height: 1;
+        color: rgba(255, 255, 255, 0.92);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
       }
-      .gallery-item img {
+      .cover span {
+        font-size: 9px;
+        letter-spacing: 0.2px;
+        text-transform: uppercase;
+      }
+
+      /* ---------- Main panel ---------- */
+      .main {
+        background: var(--panel);
+        border-radius: var(--radius);
+        overflow-y: auto;
+        position: relative;
+        min-height: 0;
+      }
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 0 24px;
+        background: rgba(18, 18, 18, var(--top-o, 0));
+        transition: background 0.2s;
+        margin-bottom: -64px;
+      }
+      .topbar .mini-title {
+        font-size: 22px;
+        font-weight: 800;
+        opacity: var(--top-o, 0);
+        transition: opacity 0.2s;
+      }
+      .topbar .play-btn {
+        width: 44px;
+        height: 44px;
+        opacity: var(--top-o, 0);
+        pointer-events: var(--top-pe, none);
+      }
+      .topbar .spacer {
+        flex: 1;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 16px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 14px;
+        border: 1px solid var(--subtle);
+        transition:
+          transform 0.1s,
+          border-color 0.2s;
+      }
+      .pill:hover {
+        border-color: #fff;
+        transform: scale(1.04);
+      }
+      .pill svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .hero {
+        position: relative;
+        min-height: 380px;
+        display: flex;
+        align-items: flex-end;
+        padding: 80px 24px 24px;
+        background:
+          linear-gradient(180deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.6)),
+          url("CEA23100-A256-4E94-8520-2ED06DE266D8.jpg") center 25% / cover;
+      }
+      .hero-badge {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .hero-badge svg {
+        width: 24px;
+        height: 24px;
+        color: #3d91f4;
+      }
+      .hero h1 {
+        font-size: clamp(48px, 9vw, 96px);
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        line-height: 1;
+        margin: 8px 0 16px;
+        text-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+      }
+      .hero p {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 500;
+        text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+      }
+
+      .content {
+        background: linear-gradient(180deg, #2a2236 0, var(--panel) 240px);
+        padding: 24px;
+      }
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        margin-bottom: 24px;
+      }
+      .play-btn {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: var(--green);
+        color: #000;
+        display: grid;
+        place-items: center;
+        flex: none;
+        transition:
+          transform 0.1s,
+          background 0.2s;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      }
+      .play-btn:hover {
+        transform: scale(1.05);
+        background: #3be477;
+      }
+      .play-btn svg {
+        width: 24px;
+        height: 24px;
+      }
+      .icon-btn {
+        color: var(--muted);
+        transition:
+          color 0.2s,
+          transform 0.1s;
+        position: relative;
+      }
+      .icon-btn:hover {
+        color: var(--text);
+        transform: scale(1.04);
+      }
+      .icon-btn.on {
+        color: var(--green);
+      }
+      .icon-btn.on::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -7px;
+        width: 4px;
+        height: 4px;
+        margin-left: -2px;
+        border-radius: 50%;
+        background: var(--green);
+      }
+      .actions .icon-btn svg {
+        width: 32px;
+        height: 32px;
+      }
+
+      h2 {
+        font-size: 24px;
+        font-weight: 800;
+        margin: 0 0 16px;
+        letter-spacing: -0.01em;
+      }
+      section + section {
+        margin-top: 40px;
+      }
+
+      /* ---------- Track table ---------- */
+      .table-head,
+      .row {
+        display: grid;
+        grid-template-columns: 32px minmax(0, 1fr) 110px 88px;
+        gap: 16px;
+        align-items: center;
+        padding: 0 16px;
+      }
+      .table-head {
+        height: 36px;
+        color: var(--muted);
+        font-size: 14px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 8px;
+      }
+      .row {
+        height: 56px;
+        border-radius: 4px;
+        color: var(--muted);
+        cursor: default;
+      }
+      .row:hover,
+      .row.open {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .row .num {
+        position: relative;
+        text-align: right;
+        font-size: 16px;
+        font-variant-numeric: tabular-nums;
+      }
+      .row .num-play {
+        display: none;
+        color: var(--text);
+        margin-left: auto;
+      }
+      .row .num-play svg {
+        width: 16px;
+        height: 16px;
+      }
+      .row:hover .num-text,
+      .row.is-current .num-text {
+        display: none;
+      }
+      .row:hover .num-play {
+        display: block;
+      }
+      .row.is-current:not(:hover) .eq {
+        display: flex;
+      }
+      .eq {
+        display: none;
+        justify-content: flex-end;
+        gap: 2px;
+        height: 14px;
+        align-items: flex-end;
+      }
+      .eq i {
+        width: 3px;
+        background: var(--green);
+        animation: eq 0.9s ease-in-out infinite;
+      }
+      .eq i:nth-child(2) {
+        animation-delay: -0.3s;
+      }
+      .eq i:nth-child(3) {
+        animation-delay: -0.6s;
+      }
+      .eq i:nth-child(4) {
+        animation-delay: -0.15s;
+      }
+      .paused .eq i {
+        animation-play-state: paused;
+      }
+      @keyframes eq {
+        0%,
+        100% {
+          height: 3px;
+        }
+        50% {
+          height: 14px;
+        }
+      }
+      .row .title-cell {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+      }
+      .row .cover {
+        width: 40px;
+        height: 40px;
+        flex: none;
+      }
+      .row .cover span {
+        display: none;
+      }
+      .row .t {
+        color: var(--text);
+        font-size: 16px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .row.is-current .t {
+        color: var(--green);
+      }
+      .row .songs-btn {
+        font-size: 14px;
+        color: var(--muted);
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        justify-self: start;
+      }
+      .row .songs-btn:hover {
+        color: var(--text);
+        text-decoration: underline;
+      }
+      .row .songs-btn svg {
+        width: 14px;
+        height: 14px;
+        transition: transform 0.2s;
+      }
+      .row.open .songs-btn svg {
+        transform: rotate(180deg);
+      }
+      .row .row-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 16px;
+      }
+      .row .row-actions .icon-btn {
+        opacity: 0;
+      }
+      .row:hover .row-actions .icon-btn,
+      .row .row-actions .icon-btn:focus-visible {
+        opacity: 1;
+      }
+      .row-actions svg {
+        width: 18px;
+        height: 18px;
+      }
+      .songs {
+        display: none;
+        margin: 0 0 8px;
+        padding: 8px 16px 12px 64px;
+        list-style: none;
+        counter-reset: s;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 0 0 4px 4px;
+      }
+      .songs.open {
+        display: block;
+      }
+      .songs li {
+        counter-increment: s;
+        display: flex;
+        gap: 14px;
+        padding: 6px 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .songs li::before {
+        content: counter(s);
+        width: 16px;
+        text-align: right;
+        color: var(--subtle);
+        font-variant-numeric: tabular-nums;
+      }
+      .songs b {
+        color: var(--text);
+        font-weight: 500;
+      }
+      .empty {
+        color: var(--muted);
+        padding: 24px 16px;
+      }
+
+      /* ---------- Cards ---------- */
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+        gap: 8px;
+        margin: 0 -12px;
+      }
+      .card {
+        padding: 12px;
+        border-radius: 6px;
+        transition: background 0.3s;
+        cursor: pointer;
+        text-align: left;
+      }
+      .card:hover {
+        background: var(--hover);
+      }
+      .card-art {
+        position: relative;
+        margin-bottom: 10px;
+      }
+      .card-art .cover {
+        aspect-ratio: 1;
+        width: 100%;
+        padding: 12px;
+        border-radius: 6px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      }
+      .card-art .cover span {
+        font-size: 20px;
+        text-transform: none;
+        letter-spacing: -0.01em;
+      }
+      .card-art .play-btn {
+        position: absolute;
+        right: 8px;
+        bottom: 8px;
+        width: 48px;
+        height: 48px;
+        opacity: 0;
+        transform: translateY(8px);
+        transition:
+          opacity 0.25s,
+          transform 0.25s;
+      }
+      .card:hover .play-btn,
+      .card.is-current .play-btn {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .card-title {
+        font-size: 16px;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .card.is-current .card-title {
+        color: var(--green);
+      }
+      .card-sub {
+        color: var(--muted);
+        margin-top: 4px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      /* ---------- Photos ---------- */
+      .photos {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
+      }
+      .photo {
+        aspect-ratio: 4 / 5;
+        border-radius: 8px;
+        overflow: hidden;
+        background: var(--panel-2);
+        cursor: zoom-in;
+      }
+      .photo img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         display: block;
-        transition:
-          transform 0.45s ease,
-          filter 0.45s ease;
+        transition: transform 0.45s ease;
       }
-      .gallery-item:hover img {
-        transform: scale(1.08);
-        filter: brightness(1.05);
+      .photo:hover img {
+        transform: scale(1.06);
       }
-      .gallery-item .gallery-caption {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        padding: 10px 12px;
-        font-size: 13px;
-        font-weight: 600;
-        letter-spacing: 0.3px;
-        color: #fff;
-        background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.75));
-        opacity: 0;
-        transform: translateY(6px);
-        transition:
-          opacity 0.3s ease,
-          transform 0.3s ease;
-      }
-      .gallery-item:hover .gallery-caption {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      #galleryModal .modal-content {
-        background: #0b1320;
-        border: none;
-      }
-      #galleryModal img {
-        width: 100%;
-        border-radius: 4px;
-      }
-      /* Class-based styles to fix the duplicate ID violations */
-      .mix-container {
+
+      /* ---------- About ---------- */
+      .about {
+        position: relative;
+        border-radius: 8px;
+        overflow: hidden;
+        min-height: 320px;
+        max-width: 780px;
         display: flex;
-        gap: 12px;
-        align-items: center;
+        align-items: flex-end;
+        padding: 32px;
+        background:
+          linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.85)),
+          url("Oprahh9U8A1789.JPG") center 30% / cover;
+      }
+      .about p {
+        font-size: 16px;
+        line-height: 1.5;
+        max-width: 520px;
+        margin: 0 0 16px;
+      }
+      .about .pill {
+        border-color: #fff;
+      }
+
+      .foot {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin-top: 48px;
+        padding: 32px 0 16px;
+        color: var(--muted);
+        display: flex;
+        gap: 16px;
         flex-wrap: wrap;
-        margin-bottom: 16px;
-        padding: 10px;
-        background: rgba(255, 255, 255, 0.01);
+        justify-content: space-between;
+      }
+      .foot a:hover {
+        color: var(--text);
+        text-decoration: underline;
+      }
+
+      /* ---------- Player bar ---------- */
+      .player {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: minmax(180px, 30%) 1fr minmax(180px, 30%);
+        align-items: center;
+        gap: 16px;
+        padding: 0 8px;
+      }
+      .now {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        min-width: 0;
+      }
+      .now .cover {
+        width: 56px;
+        height: 56px;
+        flex: none;
+      }
+      .now .cover span {
+        display: none;
+      }
+      .now-title {
+        font-size: 14px;
+        font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .now-sub {
+        color: var(--muted);
+        font-size: 12px;
+        margin-top: 4px;
+      }
+      .center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        max-width: 720px;
+        width: 100%;
+        justify-self: center;
+      }
+      .controls {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+      .controls svg {
+        width: 16px;
+        height: 16px;
+      }
+      .controls .main-toggle {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #fff;
+        color: #000;
+        display: grid;
+        place-items: center;
+        transition: transform 0.1s;
+      }
+      .controls .main-toggle:hover {
+        transform: scale(1.06);
+      }
+      .seek {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        color: var(--muted);
+        font-size: 12px;
+        font-variant-numeric: tabular-nums;
+      }
+      .seek .time {
+        min-width: 40px;
+        text-align: center;
+      }
+      .right {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 12px;
+      }
+      .right svg {
+        width: 16px;
+        height: 16px;
+      }
+      .right .range {
+        width: 100px;
+      }
+
+      .range {
+        -webkit-appearance: none;
+        appearance: none;
+        flex: 1;
+        height: 12px;
+        background: transparent;
+        margin: 0;
+        cursor: pointer;
+        --p: 0%;
+      }
+      .range::-webkit-slider-runnable-track {
+        height: 4px;
+        border-radius: 2px;
+        background: linear-gradient(
+          90deg,
+          var(--fill, #fff) var(--p),
+          #4d4d4d var(--p)
+        );
+      }
+      .range::-moz-range-track {
+        height: 4px;
+        border-radius: 2px;
+        background: linear-gradient(
+          90deg,
+          var(--fill, #fff) var(--p),
+          #4d4d4d var(--p)
+        );
+      }
+      .range::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #fff;
+        margin-top: -4px;
+        opacity: 0;
+      }
+      .range::-moz-range-thumb {
+        width: 12px;
+        height: 12px;
+        border: 0;
+        border-radius: 50%;
+        background: #fff;
+        opacity: 0;
+      }
+      .range:hover {
+        --fill: var(--green);
+      }
+      .range:hover::-webkit-slider-thumb {
+        opacity: 1;
+      }
+      .range:hover::-moz-range-thumb {
+        opacity: 1;
+      }
+
+      /* ---------- Lightbox ---------- */
+      dialog.lightbox {
+        border: 0;
+        padding: 0;
+        background: transparent;
+        max-width: min(92vw, 1000px);
+        max-height: 90vh;
+      }
+      dialog.lightbox::backdrop {
+        background: rgba(0, 0, 0, 0.85);
+      }
+      dialog.lightbox img {
+        display: block;
+        max-width: 100%;
+        max-height: 90vh;
         border-radius: 8px;
       }
-      .mix-player {
-        min-width: 240px;
+
+      :focus-visible {
+        outline: 2px solid #fff;
+        outline-offset: 2px;
       }
-      .tracklist-toggle {
-        font-size: 12px;
+      .main::-webkit-scrollbar,
+      .library-list::-webkit-scrollbar {
+        width: 12px;
       }
-      .tracklist {
-        width: 100%;
-        margin-top: 8px;
-        padding-top: 8px;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      .main::-webkit-scrollbar-thumb,
+      .library-list::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border: 3px solid transparent;
+        background-clip: padding-box;
+        border-radius: 8px;
       }
-      .tracklist-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        font-size: 14px;
-        color: #d8e0f0;
+
+      /* ---------- Mobile ---------- */
+      .mobile-search {
+        display: none;
       }
-      .tracklist-list li {
-        padding: 3px 0;
-      }
-      .tracklist-list li::before {
-        content: "\266A  ";
-        opacity: 0.5;
+      @media (max-width: 900px) {
+        :root {
+          --player-h: 72px;
+        }
+        .app {
+          grid-template-columns: 1fr;
+          padding: 0;
+          gap: 0;
+        }
+        .sidebar {
+          display: none;
+        }
+        .main {
+          border-radius: 0;
+        }
+        .topbar,
+        .content {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+        .hero {
+          min-height: 320px;
+          padding: 80px 16px 20px;
+        }
+        .mobile-search {
+          display: block;
+          margin: 0 0 16px;
+        }
+        .table-head {
+          display: none;
+        }
+        .table-head,
+        .row {
+          grid-template-columns: 24px minmax(0, 1fr) auto;
+          gap: 12px;
+          padding: 0 8px;
+        }
+        .row .songs-cell {
+          display: none;
+        }
+        .row .row-actions .icon-btn {
+          opacity: 1;
+        }
+        .songs {
+          padding-left: 44px;
+        }
+        .cards {
+          grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        }
+        .photos {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 8px;
+        }
+        .about {
+          padding: 20px;
+        }
+        .player {
+          position: relative;
+          grid-template-columns: minmax(0, 1fr) auto;
+          background: #2a2236;
+          margin: 0;
+          padding: 0 12px;
+        }
+        .now .cover {
+          width: 44px;
+          height: 44px;
+        }
+        .center {
+          width: auto;
+        }
+        .controls {
+          gap: 18px;
+        }
+        .controls .hide-sm,
+        .right {
+          display: none;
+        }
+        .seek {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: -6px;
+        }
+        .seek .time {
+          display: none;
+        }
       }
     </style>
   </head>
   <body>
-    <nav
-      class="navbar navbar-expand-lg navbar-dark"
-      style="background: linear-gradient(90deg, #081126, #1a0f2b)"
-    >
-      <a class="navbar-brand" href="/">DJ Adjective</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#nav"
-        aria-controls="nav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <!-- Inline icon sprites -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="i-play" viewBox="0 0 24 24">
+        <path
+          d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"
+        />
+      </symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24">
+        <rect x="5.5" y="3.5" width="4.5" height="17" rx="1.2" />
+        <rect x="14" y="3.5" width="4.5" height="17" rx="1.2" />
+      </symbol>
+      <symbol id="i-next" viewBox="0 0 24 24">
+        <path
+          d="M5 4.6v14.8a.8.8 0 0 0 1.2.7L17 13.2V19a1 1 0 0 0 2 0V5a1 1 0 0 0-2 0v5.8L6.2 3.9A.8.8 0 0 0 5 4.6z"
+        />
+      </symbol>
+      <symbol id="i-prev" viewBox="0 0 24 24">
+        <path
+          d="M19 4.6v14.8a.8.8 0 0 1-1.2.7L7 13.2V19a1 1 0 0 1-2 0V5a1 1 0 0 1 2 0v5.8l10.8-6.9a.8.8 0 0 1 1.2.7z"
+        />
+      </symbol>
+      <symbol id="i-shuffle" viewBox="0 0 24 24">
+        <path
+          d="M17.3 3.3a1 1 0 0 1 1.4 0l3 3a1 1 0 0 1 0 1.4l-3 3a1 1 0 1 1-1.4-1.4L18.6 8H17a5 5 0 0 0-4.1 2.1l-3.7 5.3A7 7 0 0 1 3.5 18H2a1 1 0 1 1 0-2h1.5a5 5 0 0 0 4.1-2.1l3.7-5.3A7 7 0 0 1 17 6h1.6l-1.3-1.3a1 1 0 0 1 0-1.4zM2 6h1.5a7 7 0 0 1 4.8 1.9 1 1 0 0 1-1.4 1.5A5 5 0 0 0 3.5 8H2a1 1 0 1 1 0-2zm13.1 8.6a1 1 0 0 1 1.4.1A5 5 0 0 0 17 16h1.6l-1.3-1.3a1 1 0 0 1 1.4-1.4l3 3a1 1 0 0 1 0 1.4l-3 3a1 1 0 0 1-1.4-1.4l1.3-1.3H17a7 7 0 0 1-2-.3 1 1 0 0 1 .1-3.5z"
+        />
+      </symbol>
+      <symbol id="i-repeat" viewBox="0 0 24 24">
+        <path
+          d="M7 5h10a5 5 0 0 1 5 5v1a1 1 0 1 1-2 0v-1a3 3 0 0 0-3-3H7v1.6a.6.6 0 0 1-1 .4L3.4 6.4a.6.6 0 0 1 0-.8L6 3a.6.6 0 0 1 1 .4V5zm10 14H7a5 5 0 0 1-5-5v-1a1 1 0 1 1 2 0v1a3 3 0 0 0 3 3h10v-1.6a.6.6 0 0 1 1-.4l2.6 2.6a.6.6 0 0 1 0 .8L18 21a.6.6 0 0 1-1-.4V19z"
+        />
+      </symbol>
+      <symbol id="i-volume" viewBox="0 0 24 24">
+        <path
+          d="M11 4.2v15.6a.8.8 0 0 1-1.3.6L5.2 16H3a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2.2l4.5-4.4a.8.8 0 0 1 1.3.6zM15.5 8a1 1 0 0 1 1.4.2 6.3 6.3 0 0 1 0 7.6 1 1 0 1 1-1.6-1.2 4.3 4.3 0 0 0 0-5.2 1 1 0 0 1 .2-1.4zm3-3a1 1 0 0 1 1.4.1 10.6 10.6 0 0 1 0 13.8 1 1 0 0 1-1.5-1.3 8.6 8.6 0 0 0 0-11.2 1 1 0 0 1 .1-1.4z"
+        />
+      </symbol>
+      <symbol id="i-mute" viewBox="0 0 24 24">
+        <path
+          d="M11 4.2v15.6a.8.8 0 0 1-1.3.6L5.2 16H3a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2.2l4.5-4.4a.8.8 0 0 1 1.3.6zm4.3 4.1a1 1 0 0 1 1.4 0L19 10.6l2.3-2.3a1 1 0 1 1 1.4 1.4L20.4 12l2.3 2.3a1 1 0 0 1-1.4 1.4L19 13.4l-2.3 2.3a1 1 0 0 1-1.4-1.4l2.3-2.3-2.3-2.3a1 1 0 0 1 0-1.4z"
+        />
+      </symbol>
+      <symbol id="i-download" viewBox="0 0 24 24">
+        <path
+          d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm0 3a1 1 0 0 1 1 1v5.6l1.8-1.8a1 1 0 1 1 1.4 1.4l-3.5 3.5a1 1 0 0 1-1.4 0l-3.5-3.5a1 1 0 1 1 1.4-1.4L11 13.6V8a1 1 0 0 1 1-1z"
+        />
+      </symbol>
+      <symbol id="i-share" viewBox="0 0 24 24">
+        <path
+          d="M13.5 3.6a1 1 0 0 1 1.1.2l6.5 6.5a1 1 0 0 1 0 1.4l-6.5 6.5a1 1 0 0 1-1.7-.7V14c-4.1.1-6.8 1.4-8.9 4.6a1 1 0 0 1-1.8-.6C2.7 11.8 6.4 8.5 13 8.1V4.5a1 1 0 0 1 .5-.9zM15 7v2a1 1 0 0 1-1 1c-4.6 0-7.6 1.6-8.9 4.9 2.3-1.9 5.1-2.9 8.9-2.9a1 1 0 0 1 1 1v2l4-4-4-4z"
+        />
+      </symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24">
+        <path
+          d="M5.3 8.3a1 1 0 0 1 1.4 0L12 13.6l5.3-5.3a1 1 0 1 1 1.4 1.4l-6 6a1 1 0 0 1-1.4 0l-6-6a1 1 0 0 1 0-1.4z"
+        />
+      </symbol>
+      <symbol id="i-home" viewBox="0 0 24 24">
+        <path
+          d="M11.3 2.3a1 1 0 0 1 1.4 0l9 8.5A1 1 0 0 1 22 11.5V21a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1v-5h-4v5a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-9.5a1 1 0 0 1 .3-.7l9-8.5z"
+        />
+      </symbol>
+      <symbol id="i-search" viewBox="0 0 24 24">
+        <path
+          d="M10.5 2a8.5 8.5 0 0 1 6.7 13.7l4.5 4.6a1 1 0 0 1-1.4 1.4l-4.6-4.5A8.5 8.5 0 1 1 10.5 2zm0 2a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13z"
+        />
+      </symbol>
+      <symbol id="i-library" viewBox="0 0 24 24">
+        <path
+          d="M4 3a1 1 0 0 1 1 1v16a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1zm5 0a1 1 0 0 1 1 1v16a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1zm4.7.3a1 1 0 0 1 1.2.5l6.5 15a1 1 0 0 1-1.8.8l-6.5-15a1 1 0 0 1 .6-1.3z"
+        />
+      </symbol>
+      <symbol id="i-verified" viewBox="0 0 24 24">
+        <path
+          d="M12 1.5l2.6 1.9 3.2-.1 1 3 2.6 1.9-1 3.1 1 3-2.6 1.9-1 3.1-3.2-.1L12 22.5l-2.6-1.9-3.2.1-1-3.1-2.6-1.9 1-3-1-3.1 2.6-1.9 1-3 3.2.1L12 1.5zm4.2 7.3a1 1 0 0 0-1.4 0L10.8 13 9.2 11.3a1 1 0 0 0-1.4 1.4l2.3 2.3a1 1 0 0 0 1.4 0l4.7-4.8a1 1 0 0 0 0-1.4z"
+          fill="currentColor"
+        />
+        <path
+          d="M16.2 8.8a1 1 0 0 0-1.4 0L10.8 13 9.2 11.3a1 1 0 0 0-1.4 1.4l2.3 2.3a1 1 0 0 0 1.4 0l4.7-4.8a1 1 0 0 0 0-1.4z"
+          fill="#fff"
+        />
+      </symbol>
+      <symbol id="i-ig" viewBox="0 0 24 24">
+        <path
+          d="M8 2h8a6 6 0 0 1 6 6v8a6 6 0 0 1-6 6H8a6 6 0 0 1-6-6V8a6 6 0 0 1 6-6zm0 2a4 4 0 0 0-4 4v8a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4V8a4 4 0 0 0-4-4H8zm4 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.5-3.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+        />
+      </symbol>
+    </svg>
 
-      <div class="collapse navbar-collapse" id="nav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="landing.html">Landing</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <header
-      class="py-5 text-center"
-      style="
-        background:
-          linear-gradient(
-            180deg,
-            rgba(8, 17, 38, 0.55) 0%,
-            rgba(8, 17, 38, 0.75) 60%,
-            #0b1320 100%
-          ),
-          url(&quot;CEA23100-A256-4E94-8520-2ED06DE266D8.jpg&quot;);
-        background-size: cover;
-        background-position: center 25%;
-        padding-top: 6rem;
-        padding-bottom: 6rem;
-      "
-    >
-      <div class="container">
-        <h1
-          class="display-4"
-          style="text-shadow: 0 2px 18px rgba(0, 0, 0, 0.6)"
-        >
-          DJ Adjective
-        </h1>
-        <p
-          class="lead"
-          style="color: #d8e0f0; text-shadow: 0 1px 10px rgba(0, 0, 0, 0.6)"
-        >
-          Blends of hip hop, R&amp;B, pop &amp; neosoul — pick a mix and press
-          play
-        </p>
-      </div>
-    </header>
-
-    <main class="container py-4">
-      <div class="row">
-        <div class="col-lg-8">
-          <h3 class="mb-4">Mixes</h3>
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="Scuba1.m4a" download
-              >Scuba Deep Sea Diver Retrograde Mix part 1</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="Scuba1.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-            <button
-              class="btn btn-sm btn-outline-secondary tracklist-toggle"
-              type="button"
-              data-toggle="collapse"
-              data-target="#tracklist-scuba1"
-              aria-expanded="false"
-              aria-controls="tracklist-scuba1"
-            >
-              Songs in this mix &#9662;
-            </button>
-            <div class="collapse tracklist" id="tracklist-scuba1">
-              <ul class="tracklist-list">
-                <li>Practice What You Preach — Barry White</li>
-                <li>Tell Me What You Want — Dru Hill</li>
-                <li>My Body — LSG</li>
-                <li>Age Ain't Nothing But a Number — Pretty Ricky</li>
-                <li>Read Your Mind — Avant</li>
-                <li>TwentyForePlay — Janet Jackson</li>
-              </ul>
-            </div>
+    <div class="app">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <nav class="side-box side-nav">
+          <a href="#" class="active" data-scroll="top">
+            <svg><use href="#i-home" /></svg>Home
+          </a>
+          <label for="search">
+            <svg><use href="#i-search" /></svg>Search
+          </label>
+        </nav>
+        <div class="side-box library">
+          <div class="library-head">
+            <svg><use href="#i-library" /></svg>Your Library
           </div>
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="Scuba2.m4a" download
-              >Scuba Deep Sea Diver Retrograde Mix part 2</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="Scuba2.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-            <button
-              class="btn btn-sm btn-outline-secondary tracklist-toggle"
-              type="button"
-              data-toggle="collapse"
-              data-target="#tracklist-scuba2"
-              aria-expanded="false"
-              aria-controls="tracklist-scuba2"
-            >
-              Songs in this mix &#9662;
-            </button>
-            <div class="collapse tracklist" id="tracklist-scuba2">
-              <ul class="tracklist-list">
-                <li>On the Hotline — Pretty Ricky</li>
-                <li>Lovers &amp; Friends — Usher &amp; Lil Jon</li>
-                <li>BPW — Jazmine Sullivan</li>
-                <li>Choke — Ari Lennox</li>
-                <li>Girls Need Love — Summer Walker</li>
-                <li>None of Your Friends' Business — Ginuwine</li>
-              </ul>
-            </div>
+          <div class="search-wrap">
+            <svg><use href="#i-search" /></svg>
+            <input
+              id="search"
+              class="search"
+              type="search"
+              placeholder="Search mixes or songs"
+              autocomplete="off"
+            />
           </div>
+          <div class="library-list" id="libraryList"></div>
+        </div>
+      </aside>
 
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="redo 752026.m4a" download
-              >Cyber Mix</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="redo 752026.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-            <button
-              class="btn btn-sm btn-outline-secondary tracklist-toggle"
-              type="button"
-              data-toggle="collapse"
-              data-target="#tracklist-cyber"
-              aria-expanded="false"
-              aria-controls="tracklist-cyber"
-            >
-              Songs in this mix &#9662;
-            </button>
-            <div class="collapse tracklist" id="tracklist-cyber">
-              <ul class="tracklist-list">
-                <li>Bound 2 — Kanye West &amp; Charlie Wilson</li>
-                <li>Download — Lil' Kim, T-Pain &amp; Charlie Wilson</li>
-                <li>Like That — Memphis Bleek feat. Swizz Beatz</li>
-                <li>Treat 'Em Right — Lil Wayne</li>
-                <li>Just Right (Remix) — Mary J. Blige</li>
-                <li>Fancy — Drake &amp; Mary J. Blige</li>
-                <li>Mr. Wrong — Mary J. Blige &amp; Drake</li>
-                <li>Throw It in the Bag — Fabolous</li>
-                <li>Watch My Shoes — Boosie Badazz</li>
-                <li>Wipe Me Down — Boosie Badazz</li>
-                <li>Set It Off — Juvenile</li>
-                <li>B.B.B. — Juvenile &amp; Megan Thee Stallion</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="july 3 2026.m4a" download
-              >July 3 2026 Mix</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="july 3 2026.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-            <button
-              class="btn btn-sm btn-outline-secondary tracklist-toggle"
-              type="button"
-              data-toggle="collapse"
-              data-target="#tracklist-july3"
-              aria-expanded="false"
-              aria-controls="tracklist-july3"
-            >
-              Songs in this mix &#9662;
-            </button>
-            <div class="collapse tracklist" id="tracklist-july3">
-              <ul class="tracklist-list">
-                <li>Good Morning Gorgeous — Mary J. Blige</li>
-                <li>I'm a Mess Right Now — Anthony Hamilton</li>
-                <li>Put That Woman First — Jaheim</li>
-                <li>Gotta Find My Way Back — Jaheim</li>
-                <li>Ex-Factor — Lauryn Hill</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="June220206.m4a" download
-              >June 2 2026 Mix</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="June220206.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-            <button
-              class="btn btn-sm btn-outline-secondary tracklist-toggle"
-              type="button"
-              data-toggle="collapse"
-              data-target="#tracklist-june2"
-              aria-expanded="false"
-              aria-controls="tracklist-june2"
-            >
-              Songs in this mix &#9662;
-            </button>
-            <div class="collapse tracklist" id="tracklist-june2">
-              <ul class="tracklist-list">
-                <li>Can't Let Go — Anthony Hamilton</li>
-                <li>Put That Woman First — Jaheim</li>
-                <li>Superstar — Usher</li>
-                <li>I Call Your Name — Switch</li>
-                <li>If You Think You're Lonely Now — Jodeci</li>
-                <li>I Want to Be With You — Mary J. Blige</li>
-                <li>I Choose You — Willie Hutch</li>
-                <li>International Players Anthem — UGK feat. OutKast</li>
-                <li>I Love You — Patti LaBelle</li>
-                <li>Lay It Down — Lloyd</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="june 2026 copy.m4a" download
-              >June 2026 Mix</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="june 2026 copy.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-            <button
-              class="btn btn-sm btn-outline-secondary tracklist-toggle"
-              type="button"
-              data-toggle="collapse"
-              data-target="#tracklist-june2026"
-              aria-expanded="false"
-              aria-controls="tracklist-june2026"
-            >
-              Songs in this mix &#9662;
-            </button>
-            <div class="collapse tracklist" id="tracklist-june2026">
-              <ul class="tracklist-list">
-                <li>Young Hearts Run Free — Candi Staton</li>
-                <li>Ring the Alarm — Beyoncé</li>
-                <li>Ring Off — Beyoncé</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="mix-container">
-            <a
-              class="btn btn-outline-light"
-              href="LibraFullMoonPart1.m4a"
-              download
-              >Libra Full Moon Part 1 Mix</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="LibraFullMoonPart1.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-            <button
-              class="btn btn-sm btn-outline-secondary tracklist-toggle"
-              type="button"
-              data-toggle="collapse"
-              data-target="#tracklist-libra1"
-              aria-expanded="false"
-              aria-controls="tracklist-libra1"
-            >
-              Songs in this mix &#9662;
-            </button>
-            <div class="collapse tracklist" id="tracklist-libra1">
-              <ul class="tracklist-list">
-                <li>I Love You — Patti LaBelle</li>
-                <li>Lay It Down (Remix) — Lloyd ft. Patti LaBelle</li>
-                <li>Invented Sex — Trey Songz</li>
-                <li>Say Aah — Trey Songz</li>
-                <li>BPW — Jazmine Sullivan</li>
-                <li>On It — Jazmine Sullivan ft. Ari Lennox</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="mix-container">
-            <a
-              class="btn btn-outline-light"
-              href="LibraFullMoonPart2.m4a"
-              download
-              >Libra Full Moon Part 2 Mix</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="LibraFullMoonPart2.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-            <button
-              class="btn btn-sm btn-outline-secondary tracklist-toggle"
-              type="button"
-              data-toggle="collapse"
-              data-target="#tracklist-libra2"
-              aria-expanded="false"
-              aria-controls="tracklist-libra2"
-            >
-              Songs in this mix &#9662;
-            </button>
-            <div class="collapse tracklist" id="tracklist-libra2">
-              <ul class="tracklist-list">
-                <li>Choke — Ari Lennox</li>
-                <li>Ride — Ciara</li>
-                <li>Not Tonight — Lil' Kim</li>
-                <li>My Neck, My Back — Khia</li>
-                <li>Cuff It (Wetter Remix) — Beyoncé</li>
-                <li>Wetter — Twista</li>
-                <li>TwentyForePlay — Janet Jackson</li>
-                <li>I Get Lonely — Janet Jackson</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="mix-container">
-            <a
-              class="btn btn-outline-light"
-              href="LibraFullMoonPart3.m4a"
-              download
-              >Libra Full Moon Part 3Mix</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="LibraFullMoonPart3.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-            <button
-              class="btn btn-sm btn-outline-secondary tracklist-toggle"
-              type="button"
-              data-toggle="collapse"
-              data-target="#tracklist-libra3"
-              aria-expanded="false"
-              aria-controls="tracklist-libra3"
-            >
-              Songs in this mix &#9662;
-            </button>
-            <div class="collapse tracklist" id="tracklist-libra3">
-              <ul class="tracklist-list">
-                <li>Sativa — Jhené Aiko</li>
-                <li>Oui — Jeremih</li>
-                <li>Come Thru — Summer Walker</li>
-                <li>Girls Need Love (Remix) — Summer Walker ft. Drake</li>
-                <li>BBB — Juvenile &amp; Megan Thee Stallion</li>
-                <li>We Will Rock You — Megan Thee Stallion</li>
-                <li>Party Like a Rockstar — Shop Boyz</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="DrumsPart1.m4a" download
-              >Drums Part1 Mix</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="DrumsPart1.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="DrumPart2.m4a" download
-              >Drums Part2 Mix</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="DrumPart2.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="ring off.m4a" download
-              >Ring Off Mix</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="ring off.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-            <button
-              class="btn btn-sm btn-outline-secondary tracklist-toggle"
-              type="button"
-              data-toggle="collapse"
-              data-target="#tracklist-ringoff"
-              aria-expanded="false"
-              aria-controls="tracklist-ringoff"
-            >
-              Songs in this mix &#9662;
-            </button>
-            <div class="collapse tracklist" id="tracklist-ringoff">
-              <ul class="tracklist-list">
-                <li>Ring Off — Beyoncé</li>
-                <li>Standing on the Sun — Beyoncé</li>
-                <li>Baby Boy — Beyoncé ft. Sean Paul</li>
-                <li>Umbrella — Rihanna ft. Jay-Z</li>
-                <li>No Letting Go — LL Cool J</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="perfect12.23.m4a" download
-              >Dec 23 25 Mix</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="perfect12.23.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-            <button
-              class="btn btn-sm btn-outline-secondary tracklist-toggle"
-              type="button"
-              data-toggle="collapse"
-              data-target="#tracklist-dec23"
-              aria-expanded="false"
-              aria-controls="tracklist-dec23"
-            >
-              Songs in this mix &#9662;
-            </button>
-            <div class="collapse tracklist" id="tracklist-dec23">
-              <ul class="tracklist-list">
-                <li>Cowgirls — Morgan Wallen</li>
-                <li>Keep On Rolling — King George</li>
-                <li>Boots on the Ground — 803Fresh</li>
-                <li>Thick — BigXthaPlug</li>
-                <li>Them Jeans — Master P</li>
-                <li>Bunny Hop — Da Entourage</li>
-                <li>Presidential — YoungBloodZ</li>
-                <li>Set It Off — Juvenile</li>
-                <li>Set It Off — Strafe</li>
-                <li>Homecoming Intro — Beyoncé</li>
-                <li>Roc Boys — Jay-Z</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="hour1.3.m4a" download
-              >Gen X Old School Mix 1 - 15 mins Mix</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="hour1.3.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="hourlong2.3.m4a" download
-              >Gen X Old School Mix Part 2 Mix</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="hourlong2.3.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="hourlong3.3.m4a" download
-              >Gen X Old School Mix 3 Mix</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="hourlong3.3.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="country.m4a" download
-              >Country</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="country.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-            <button
-              class="btn btn-sm btn-outline-secondary tracklist-toggle"
-              type="button"
-              data-toggle="collapse"
-              data-target="#tracklist-country1"
-              aria-expanded="false"
-              aria-controls="tracklist-country1"
-            >
-              Songs in this mix &#9662;
-            </button>
-            <div class="collapse tracklist" id="tracklist-country1">
-              <ul class="tracklist-list">
-                <li>Cowgirls — Morgan Wallen</li>
-                <li>Keep On Rolling — King George</li>
-                <li>Boots on the Ground — 803Fresh</li>
-                <li>Thick — BigXthaPlug</li>
-                <li>Them Jeans — Master P</li>
-                <li>Bunny Hop — Da Entourage</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="countrypart2.m4a" download
-              >Country part 2</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="countrypart2.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-            <button
-              class="btn btn-sm btn-outline-secondary tracklist-toggle"
-              type="button"
-              data-toggle="collapse"
-              data-target="#tracklist-country2"
-              aria-expanded="false"
-              aria-controls="tracklist-country2"
-            >
-              Songs in this mix &#9662;
-            </button>
-            <div class="collapse tracklist" id="tracklist-country2">
-              <ul class="tracklist-list">
-                <li>Presidential — YoungBloodZ</li>
-                <li>Set It Off — Juvenile</li>
-                <li>Set It Off — Strafe</li>
-                <li>Homecoming Intro — Beyoncé</li>
-                <li>Roc Boys — Jay-Z</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="stairmasterpt1.m4a" download
-              >Gym/Dance/Workout part 1 - 15 mins Mix</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="stairmasterpt1.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="stairmasterpt2.m4a" download
-              >Gym/Dance/Workout part 2 - 15 mins Mix</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="stairmasterpt2.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="14mins.m4a" download
-              >Winter Solstice 1 - 14 mins Mix</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="14mins.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="mix15.m4a" download
-              >Winter Solstice 2 - 15 mins Mix</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="mix15.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="mix6.m4a" download
-              >Winter Solstice 3 - 6 mins Mix</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="mix6.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="JT.Jamie.m4a" download
-              >Download JT Sexy Back Jamie I Don't Need It.m4a</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="JT.Jamie.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a
-              class="btn btn-outline-light"
-              href="public/BadBloodNao+Chrisette.m4a"
-              download
-              >Download Nao+Chrisette Couple of Forevers.m4a</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="BadBloodNao+Chrisette.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="KURN+ Maxwell.m4a" download
-              >Maxwell Somethin' Somethin' + Kiss You Right Now</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="KURN+ Maxwell.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="KYRN.Twenties.m4a" download
-              >Kiss You Right Now + Twenties</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="KYRN.Twenties.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a
-              class="btn btn-outline-light"
-              href="u got it bad+ papers (baseline).m4a"
-              download
-              >U got it bad + Papers Baseline</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source
-                src="u got it bad+ papers (baseline).m4a"
-                type="audio/mp4"
-              />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a
-              class="btn btn-outline-light"
-              href="very special + sweet thang MJB.m4a"
-              download
-              >Very Special + Sweet thang MJB</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source
-                src="very special + sweet thang MJB.m4a"
-                type="audio/mp4"
-              />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a
-              class="btn btn-outline-light"
-              href="papers + u got it bad.m4a"
-              download
-              >Download Papers + U Got It Bad</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="papers + u got it bad.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="TPain + Twista.m4a" download
-              >Twista Make a Movie + T Pain Put it Down+ Raymond</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="TPain + Twista.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a
-              class="btn btn-outline-light"
-              href="bwithoutyou+ Whitney.m4a"
-              download
-              >Be Without You + Whitney All the Man That I Need</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="bwithoutyou+ Whitney.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a
-              class="btn btn-outline-light"
-              href="flamingHottie+KittyMeg.m4a"
-              download
-              >Megan Thee Stallion flamingHottie + Kitty Kat</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="flamingHottie+KittyMeg.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a
-              class="btn btn-outline-light"
-              href="be without you- im going down.m4a"
-              download
-              >Be Without You - I'm Going Down MJB</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source
-                src="be without you- im going down.m4a"
-                type="audio/mp4"
-              />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a
-              class="btn btn-outline-light"
-              href="BeWithYouMJB+AllTheManINeedWhitney.m4a"
-              download
-              >Be Without You MJB + All The Man I Need</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source
-                src="BeWithYouMJB+AllTheManINeedWhitney.m4a"
-                type="audio/mp4"
-              />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a
-              class="btn btn-outline-light"
-              href="goodenoughciarapromise.m4a"
-              download
-              >Ciara Promise + J.Sullivan Good Enough</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="goodenoughciarapromise.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a
-              class="btn btn-outline-light"
-              href="theregoesmybabycharlieusher.m4a"
-              download
-              >There Goes My Baby - Charlie Wilson + Usher Baseline</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="theregoesmybabycharlieusher.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a
-              class="btn btn-outline-light"
-              href="theregoesmybabyushercharliewilson.m4a"
-              download
-              >There Goes My Baby Usher + Charlie Wilson Baseline</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source
-                src="theregoesmybabyushercharliewilson.m4a"
-                type="audio/mp4"
-              />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a
-              class="btn btn-outline-light"
-              href="charliewilsonbewithoutyouMJBbewithoutyou.m4a"
-              download
-              >Charlie Wilson Can't Live Without You + Be Without You MJB</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source
-                src="charliewilsonbewithoutyouMJBbewithoutyou.m4a"
-                type="audio/mp4"
-              />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a
-              class="btn btn-outline-light"
-              href="nastyWorkUgotItbad.m4a"
-              download
-              >Nasty Work + Usher U Got It Bad</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="nastyWorkUgotItbad.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a class="btn btn-outline-light" href="goodenoughciara.m4a" download
-              >Good Enough + Ciara Promise</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="goodenoughciara.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="mix-container">
-            <a
-              class="btn btn-outline-light"
-              href="ugotitbad+suffocate.m4a"
-              download
-              >U got it bad + Suffocate</a
-            >
-            <audio class="mix-player" controls preload="none">
-              <source src="ugotitbad+suffocate.m4a" type="audio/mp4" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
+      <!-- Main -->
+      <main class="main" id="main">
+        <div class="topbar">
+          <button class="play-btn" data-action="play-all" aria-label="Play">
+            <svg><use href="#i-play" /></svg>
+          </button>
+          <span class="mini-title">DJ Adjective</span>
+          <span class="spacer"></span>
+          <a
+            class="pill"
+            href="https://instagram.com/agentleproduction"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><svg><use href="#i-ig" /></svg>Follow</a
+          >
         </div>
 
-        <aside class="col-lg-4">
-          <h5 class="mb-3">Follow</h5>
-          <div class="track-card">
-            <p class="text-muted mb-2">
-              New mixes drop first on the gram — turn on notifications so you
-              don't miss a blend.
-            </p>
+        <header class="hero">
+          <div>
+            <div class="hero-badge">
+              <svg><use href="#i-verified" /></svg>Verified DJ
+            </div>
+            <h1>DJ Adjective</h1>
+            <p id="heroMeta">Blends of hip hop, R&amp;B, pop &amp; neosoul</p>
+          </div>
+        </header>
+
+        <div class="content">
+          <div class="actions">
+            <button class="play-btn" data-action="play-all" aria-label="Play">
+              <svg><use href="#i-play" /></svg>
+            </button>
+            <button class="icon-btn" data-action="shuffle" aria-label="Shuffle">
+              <svg><use href="#i-shuffle" /></svg>
+            </button>
             <a
-              class="btn btn-outline-light btn-block"
+              class="pill"
               href="https://instagram.com/agentleproduction"
               target="_blank"
               rel="noopener noreferrer"
-              >@agentleproduction</a
+              >Follow</a
             >
           </div>
-        </aside>
-      </div>
 
-      <section class="mt-5">
-        <h3 class="mb-4">Gallery</h3>
-        <div class="gallery-grid">
-          <div
-            class="gallery-item"
-            data-full="CEA23100-A256-4E94-8520-2ED06DE266D8.jpg"
-            data-caption="CEA"
-          >
-            <img
-              src="CEA23100-A256-4E94-8520-2ED06DE266D8.jpg"
-              alt="CEA"
-              loading="lazy"
+          <div class="search-wrap mobile-search">
+            <svg><use href="#i-search" /></svg>
+            <input
+              id="searchMobile"
+              class="search"
+              type="search"
+              placeholder="Search mixes or songs"
+              autocomplete="off"
             />
-            <div class="gallery-caption"></div>
           </div>
-          </div>
-          <div
-            class="gallery-item"
-            data-full="Oprahh9U8A1789.JPG"
-            data-caption="Oprah"
-          >
-            <img src="Oprahh9U8A1789.JPG" alt="Oprah" loading="lazy" />
-            <div class="gallery-caption"></div>
-          </div>
-          <div
-            class="gallery-item"
-            data-full="314F9850-D949-4662-A7EB-2024BEE368FB copy.jpg"
-            data-caption="314"
-          >
-            <img
-              src="314F9850-D949-4662-A7EB-2024BEE368FB copy.jpg"
-              alt="314"
-              loading="lazy"
-            />
-            <div class="gallery-caption">314</div>
-          </div>
-      
-          <div
-            class="gallery-item"
-            data-full="image3.png"
-            data-caption="Event Set"
-          >
-            <img src="image3.png" alt="Event Set" loading="lazy" />
-            <div class="gallery-caption"></div>
-          </div>
-          <div
-            class="gallery-item"
-            data-full="image4.jpg"
-            data-caption="Behind the Booth"
-          >
-            <img src="image4.jpg" alt="Behind the Booth" loading="lazy" />
-            <div class="gallery-caption"></div>
-          </div>
-          <div
-            class="gallery-item"
-            data-full="image2.png"
-            data-caption="Creative Space"
-          >
-            <img src="image2.png" alt="Creative Space" loading="lazy" />
-            <div class="gallery-caption"></div>
+
+          <section>
+            <h2>Mixes</h2>
+            <div class="table-head">
+              <span style="text-align: right">#</span>
+              <span>Title</span>
+              <span>Songs</span>
+              <span></span>
+            </div>
+            <div id="trackTable"></div>
+          </section>
+
+          <section>
+            <h2>Latest drops</h2>
+            <div class="cards" id="cards"></div>
+          </section>
+
+          <section>
+            <h2>Photos</h2>
+            <div class="photos" id="photos"></div>
+          </section>
+
+          <section>
+            <h2>About</h2>
+            <div class="about">
+              <div>
+                <p>
+                  New mixes drop first on the gram — turn on notifications so
+                  you don't miss a blend.
+                </p>
+                <a
+                  class="pill"
+                  href="https://instagram.com/agentleproduction"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><svg><use href="#i-ig" /></svg>@agentleproduction</a
+                >
+              </div>
+            </div>
+          </section>
+
+          <footer class="foot">
+            <span>Made by DJ Adjective — 2026</span>
+            <a
+              href="https://instagram.com/agentleproduction"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Instagram</a
+            >
+          </footer>
+        </div>
+      </main>
+
+      <!-- Now playing bar -->
+      <footer class="player" id="player">
+        <div class="now">
+          <div class="cover" id="nowCover"></div>
+          <div style="min-width: 0">
+            <div class="now-title" id="nowTitle">Pick a mix</div>
+            <div class="now-sub">DJ Adjective</div>
           </div>
         </div>
-      </section>
-    </main>
-
-    <div
-      class="modal fade"
-      id="galleryModal"
-      tabindex="-1"
-      role="dialog"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-body p-0">
-            <img id="galleryModalImg" src="" alt="" />
+        <div class="center">
+          <div class="controls">
+            <button
+              class="icon-btn hide-sm"
+              data-action="shuffle"
+              aria-label="Shuffle"
+            >
+              <svg><use href="#i-shuffle" /></svg>
+            </button>
+            <button class="icon-btn" data-action="prev" aria-label="Previous">
+              <svg><use href="#i-prev" /></svg>
+            </button>
+            <button class="main-toggle" data-action="toggle" aria-label="Play">
+              <svg><use href="#i-play" /></svg>
+            </button>
+            <button class="icon-btn" data-action="next" aria-label="Next">
+              <svg><use href="#i-next" /></svg>
+            </button>
+            <button
+              class="icon-btn hide-sm"
+              data-action="repeat"
+              aria-label="Repeat"
+            >
+              <svg><use href="#i-repeat" /></svg>
+            </button>
+          </div>
+          <div class="seek">
+            <span class="time" id="timeCur">0:00</span>
+            <input
+              class="range"
+              id="seek"
+              type="range"
+              min="0"
+              max="1000"
+              value="0"
+              aria-label="Seek"
+            />
+            <span class="time" id="timeDur">0:00</span>
           </div>
         </div>
-      </div>
+        <div class="right">
+          <a
+            class="icon-btn"
+            id="nowDownload"
+            href="#"
+            download
+            aria-label="Download current mix"
+          >
+            <svg><use href="#i-download" /></svg>
+          </a>
+          <button class="icon-btn" data-action="mute" aria-label="Mute">
+            <svg><use href="#i-volume" /></svg>
+          </button>
+          <input
+            class="range"
+            id="volume"
+            type="range"
+            min="0"
+            max="100"
+            value="80"
+            aria-label="Volume"
+          />
+        </div>
+      </footer>
     </div>
 
-    <footer
-      class="text-center py-4 text-muted"
-      style="border-top: 1px solid rgba(255, 255, 255, 0.03)"
-    >
-      <div
-        style="
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 12px;
-          flex-wrap: wrap;
-        "
-      >
-        <span>Made by DJ Adjective — 2026</span>
-        <a
-          href="https://instagram.com/agentleproduction"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Instagram"
-          style="
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: inherit;
-            text-decoration: none;
-          "
-        >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            <rect
-              x="3"
-              y="3"
-              width="18"
-              height="18"
-              rx="5"
-              stroke="currentColor"
-              stroke-width="1.2"
-            />
-            <path
-              d="M16 11.98a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"
-              stroke="currentColor"
-              stroke-width="1.2"
-              fill="none"
-            />
-            <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" />
-          </svg>
-          <span>@agentleproduction</span>
-        </a>
-      </div>
-    </footer>
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-      crossorigin="anonymous"
-    ></script>
+    <dialog class="lightbox" id="lightbox">
+      <img id="lightboxImg" src="" alt="" />
+    </dialog>
+
     <script>
-      document.querySelectorAll(".gallery-item").forEach(function (item) {
-        item.addEventListener("click", function () {
-          var img = document.getElementById("galleryModalImg");
-          img.src = item.getAttribute("data-full");
-          img.alt = item.getAttribute("data-caption") || "";
-          $("#galleryModal").modal("show");
-        });
+      // ---- Add new mixes here (newest first). `songs` is optional. ----
+      const MIXES = [
+        {
+          title: "Scuba Deep Sea Diver Retrograde Mix Part 1",
+          file: "Scuba1.m4a",
+          songs: [
+            "Practice What You Preach — Barry White",
+            "Tell Me What You Want — Dru Hill",
+            "My Body — LSG",
+            "Age Ain't Nothing But a Number — Pretty Ricky",
+            "Read Your Mind — Avant",
+            "TwentyForePlay — Janet Jackson",
+          ],
+        },
+        {
+          title: "Scuba Deep Sea Diver Retrograde Mix Part 2",
+          file: "Scuba2.m4a",
+          songs: [
+            "On the Hotline — Pretty Ricky",
+            "Lovers & Friends — Usher & Lil Jon",
+            "BPW — Jazmine Sullivan",
+            "Choke — Ari Lennox",
+            "Girls Need Love — Summer Walker",
+            "None of Your Friends' Business — Ginuwine",
+          ],
+        },
+        {
+          title: "Cyber Mix",
+          file: "redo 752026.m4a",
+          songs: [
+            "Bound 2 — Kanye West & Charlie Wilson",
+            "Download — Lil' Kim, T-Pain & Charlie Wilson",
+            "Like That — Memphis Bleek feat. Swizz Beatz",
+            "Treat 'Em Right — Lil Wayne",
+            "Just Right (Remix) — Mary J. Blige",
+            "Fancy — Drake & Mary J. Blige",
+            "Mr. Wrong — Mary J. Blige & Drake",
+            "Throw It in the Bag — Fabolous",
+            "Watch My Shoes — Boosie Badazz",
+            "Wipe Me Down — Boosie Badazz",
+            "Set It Off — Juvenile",
+            "B.B.B. — Juvenile & Megan Thee Stallion",
+          ],
+        },
+        {
+          title: "July 3 2026 Mix",
+          file: "july 3 2026.m4a",
+          songs: [
+            "Good Morning Gorgeous — Mary J. Blige",
+            "I'm a Mess Right Now — Anthony Hamilton",
+            "Put That Woman First — Jaheim",
+            "Gotta Find My Way Back — Jaheim",
+            "Ex-Factor — Lauryn Hill",
+          ],
+        },
+        {
+          title: "June 2 2026 Mix",
+          file: "June220206.m4a",
+          songs: [
+            "Can't Let Go — Anthony Hamilton",
+            "Put That Woman First — Jaheim",
+            "Superstar — Usher",
+            "I Call Your Name — Switch",
+            "If You Think You're Lonely Now — Jodeci",
+            "I Want to Be With You — Mary J. Blige",
+            "I Choose You — Willie Hutch",
+            "International Players Anthem — UGK feat. OutKast",
+            "I Love You — Patti LaBelle",
+            "Lay It Down — Lloyd",
+          ],
+        },
+        {
+          title: "June 2026 Mix",
+          file: "june 2026 copy.m4a",
+          songs: [
+            "Young Hearts Run Free — Candi Staton",
+            "Ring the Alarm — Beyoncé",
+            "Ring Off — Beyoncé",
+          ],
+        },
+        {
+          title: "Libra Full Moon Part 1",
+          file: "LibraFullMoonPart1.m4a",
+          songs: [
+            "I Love You — Patti LaBelle",
+            "Lay It Down (Remix) — Lloyd ft. Patti LaBelle",
+            "Invented Sex — Trey Songz",
+            "Say Aah — Trey Songz",
+            "BPW — Jazmine Sullivan",
+            "On It — Jazmine Sullivan ft. Ari Lennox",
+          ],
+        },
+        {
+          title: "Libra Full Moon Part 2",
+          file: "LibraFullMoonPart2.m4a",
+          songs: [
+            "Choke — Ari Lennox",
+            "Ride — Ciara",
+            "Not Tonight — Lil' Kim",
+            "My Neck, My Back — Khia",
+            "Cuff It (Wetter Remix) — Beyoncé",
+            "Wetter — Twista",
+            "TwentyForePlay — Janet Jackson",
+            "I Get Lonely — Janet Jackson",
+          ],
+        },
+        {
+          title: "Libra Full Moon Part 3",
+          file: "LibraFullMoonPart3.m4a",
+          songs: [
+            "Sativa — Jhené Aiko",
+            "Oui — Jeremih",
+            "Come Thru — Summer Walker",
+            "Girls Need Love (Remix) — Summer Walker ft. Drake",
+            "BBB — Juvenile & Megan Thee Stallion",
+            "We Will Rock You — Megan Thee Stallion",
+            "Party Like a Rockstar — Shop Boyz",
+          ],
+        },
+        { title: "Drums Part 1", file: "DrumsPart1.m4a", songs: [
+          "Poison — Bell Biv DeVoe", "The Overweight Lover's in the House — Heavy D & The Boyz",
+          "Nuttin' But Love — Heavy D & The Boyz", "Hip Hop Hooray — Naughty by Nature",
+          "Bad Boy / Having a Party — Luther Vandross", "Umbrella (Remix) — Rihanna ft. Jay-Z",
+          "The Biggest, The Largest — BigXthaPlug", "B'Day — Beyoncé",
+          "If He Don't Love You by Now — Ciara ft. Young Jeezy", "Promise — Ciara"] },
+        { title: "Drums Part 2", file: "drumPart2.m4a", songs: [
+          "My, My, My — Johnny Gill", "Shawty — Plies", "No Letting Go — LL Cool J",
+          "Freakum Dress — Beyoncé", "Crazy in Love — Beyoncé"] },
+        {
+          title: "Ring Off Mix",
+          file: "ring off.m4a",
+          songs: [
+            "Ring Off — Beyoncé",
+            "Standing on the Sun — Beyoncé",
+            "Baby Boy — Beyoncé ft. Sean Paul",
+            "Umbrella — Rihanna ft. Jay-Z",
+            "No Letting Go — LL Cool J",
+          ],
+        },
+        {
+          title: "Dec 23 '25 Mix",
+          file: "perfect12.23.m4a",
+          songs: [
+            "Cowgirls — Morgan Wallen",
+            "Keep On Rolling — King George",
+            "Boots on the Ground — 803Fresh",
+            "Thick — BigXthaPlug",
+            "Them Jeans — Master P",
+            "Bunny Hop — Da Entourage",
+            "Presidential — YoungBloodZ",
+            "Set It Off — Juvenile",
+            "Set It Off — Strafe",
+            "Homecoming Intro — Beyoncé",
+            "Roc Boys — Jay-Z",
+          ],
+        },
+        { title: "Gen X Old School Mix Part 1", file: "hour1.3.m4a" },
+        { title: "Gen X Old School Mix Part 2", file: "hourlong2.3.m4a" },
+        { title: "Gen X Old School Mix Part 3", file: "hourlong3.3.m4a" },
+        {
+          title: "Country",
+          file: "country.m4a",
+          songs: [
+            "Cowgirls — Morgan Wallen",
+            "Keep On Rolling — King George",
+            "Boots on the Ground — 803Fresh",
+            "Thick — BigXthaPlug",
+            "Them Jeans — Master P",
+            "Bunny Hop — Da Entourage",
+          ],
+        },
+        {
+          title: "Country Part 2",
+          file: "countrypart2.m4a",
+          songs: [
+            "Presidential — YoungBloodZ",
+            "Set It Off — Juvenile",
+            "Set It Off — Strafe",
+            "Homecoming Intro — Beyoncé",
+            "Roc Boys — Jay-Z",
+          ],
+        },
+        { title: "Gym / Dance / Workout Part 1", file: "stairmasterpt1.m4a" },
+        { title: "Gym / Dance / Workout Part 2", file: "stairmasterpt2.m4a" },
+        { title: "Winter Solstice 1", file: "14mins.m4a" },
+        { title: "Winter Solstice 2", file: "mix15.m4a" },
+        { title: "Winter Solstice 3", file: "mix6.m4a" },
+        { title: "JT Sexy Back + Jamie I Don't Need It", file: "JT.Jamie.m4a" },
+        {
+          title: "Nao + Chrisette Couple of Forevers",
+          file: "BadBloodNao+Chrisette.m4a",
+        },
+        {
+          title: "Maxwell Somethin' Somethin' + Kiss You Right Now",
+          file: "KURN+ Maxwell.m4a",
+        },
+        { title: "Kiss You Right Now + Twenties", file: "KYRN.Twenties.m4a" },
+        {
+          title: "U Got It Bad + Papers (Baseline)",
+          file: "u got it bad+ papers (baseline).m4a",
+        },
+        {
+          title: "Very Special + Sweet Thang MJB",
+          file: "very special + sweet thang MJB.m4a",
+        },
+        { title: "Papers + U Got It Bad", file: "papers + u got it bad.m4a" },
+        {
+          title: "Twista Make a Movie + T-Pain Put It Down + Raymond",
+          file: "TPain + Twista.m4a",
+        },
+        {
+          title: "Be Without You + Whitney All the Man That I Need",
+          file: "bwithoutyou+ Whitney.m4a",
+        },
+        {
+          title: "Megan Thee Stallion Flamin' Hottie + Kitty Kat",
+          file: "flamingHottie+KittyMeg.m4a",
+        },
+        {
+          title: "Be Without You + I'm Going Down MJB",
+          file: "be without you- im going down.m4a",
+        },
+        {
+          title: "Be Without You MJB + All The Man I Need",
+          file: "BeWithYouMJB+AllTheManINeedWhitney.m4a",
+        },
+        {
+          title: "Ciara Promise + J. Sullivan Good Enough",
+          file: "goodenoughciarapromise.m4a",
+        },
+        {
+          title: "There Goes My Baby — Charlie Wilson + Usher (Baseline)",
+          file: "theregoesmybabycharlieusher.m4a",
+        },
+        {
+          title: "There Goes My Baby — Usher + Charlie Wilson (Baseline)",
+          file: "theregoesmybabyushercharliewilson.m4a",
+        },
+        {
+          title: "Charlie Wilson Can't Live Without You + Be Without You MJB",
+          file: "charliewilsonbewithoutyouMJBbewithoutyou.m4a",
+        },
+        {
+          title: "Nasty Work + Usher U Got It Bad",
+          file: "nastyWorkUgotItbad.m4a",
+        },
+        { title: "Good Enough + Ciara Promise", file: "goodenoughciara.m4a" },
+        { title: "U Got It Bad + Suffocate", file: "ugotitbad+suffocate.m4a" },
+      ];
+
+      const PHOTOS = [
+        {
+          src: "CEA23100-A256-4E94-8520-2ED06DE266D8.jpg",
+          alt: "DJ Adjective",
+        },
+        { src: "Oprahh9U8A1789.JPG", alt: "DJ Adjective portrait" },
+        {
+          src: "314F9850-D949-4662-A7EB-2024BEE368FB copy.jpg",
+          alt: "DJ Adjective",
+        },
+        { src: "image3.png", alt: "Event set" },
+        { src: "image4.jpg", alt: "Behind the booth" },
+        { src: "image2.png", alt: "Creative space" },
+      ];
+
+      // ---------- Helpers ----------
+      const $ = (s, r = document) => r.querySelector(s);
+      const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+      const icon = (id) => `<svg><use href="#i-${id}"/></svg>`;
+      const esc = (s) =>
+        String(s).replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      const url = (file) => encodeURI(file);
+      const fmt = (t) => {
+        if (!isFinite(t)) return "0:00";
+        t = Math.floor(t);
+        const h = Math.floor(t / 3600),
+          m = Math.floor((t % 3600) / 60),
+          s = String(t % 60).padStart(2, "0");
+        return h ? `${h}:${String(m).padStart(2, "0")}:${s}` : `${m}:${s}`;
+      };
+      function coverStyle(title) {
+        let h = 0;
+        for (const c of title) h = (h * 31 + c.charCodeAt(0)) % 360;
+        return `--c: linear-gradient(135deg, hsl(${h} 65% 48%), hsl(${(h + 50) % 360} 60% 22%))`;
+      }
+      const cover = (m, cls = "") =>
+        `<div class="cover ${cls}" style="${coverStyle(m.title)}"><span>${esc(m.title.split(/[—(+]/)[0].trim())}</span></div>`;
+      const songCount = (m) => (m.songs ? `${m.songs.length} songs` : "Mix");
+      function splitSong(s) {
+        const [name, ...artist] = s.split(" — ");
+        return `<b>${esc(name)}</b>${artist.length ? " · " + esc(artist.join(" — ")) : ""}`;
+      }
+
+      // ---------- Render ----------
+      let filtered = MIXES.map((_, i) => i);
+
+      function renderLists() {
+        $("#libraryList").innerHTML = filtered
+          .map(
+            (i) => `<button class="lib-item" data-play="${i}">
+              ${cover(MIXES[i])}
+              <div class="lib-meta">
+                <div class="lib-title">${esc(MIXES[i].title)}</div>
+                <div class="lib-sub">${songCount(MIXES[i])} · DJ Adjective</div>
+              </div></button>`,
+          )
+          .join("");
+
+        $("#trackTable").innerHTML = filtered.length
+          ? filtered
+              .map((i, n) => {
+                const m = MIXES[i];
+                return `<div class="row" data-row="${i}">
+                  <div class="num">
+                    <span class="num-text">${n + 1}</span>
+                    <button class="num-play" data-play="${i}" aria-label="Play ${esc(m.title)}">${icon("play")}</button>
+                    <div class="eq"><i></i><i></i><i></i><i></i></div>
+                  </div>
+                  <div class="title-cell">${cover(m)}<span class="t">${esc(m.title)}</span></div>
+                  <div class="songs-cell">${
+                    m.songs
+                      ? `<button class="songs-btn" data-songs="${i}" aria-expanded="false">${m.songs.length} songs ${icon("chevron")}</button>`
+                      : ""
+                  }</div>
+                  <div class="row-actions">
+                    <button class="icon-btn" data-share="${i}" aria-label="Share">${icon("share")}</button>
+                    <a class="icon-btn" href="${url(m.file)}" download aria-label="Download">${icon("download")}</a>
+                  </div>
+                </div>${
+                  m.songs
+                    ? `<ol class="songs" id="songs-${i}">${m.songs.map((s) => `<li>${splitSong(s)}</li>`).join("")}</ol>`
+                    : ""
+                }`;
+              })
+              .join("")
+          : `<div class="empty">No mixes match that search.</div>`;
+        syncUI();
+      }
+
+      function renderStatic() {
+        $("#heroMeta").textContent =
+          `${MIXES.length} mixes · Blends of hip hop, R&B, pop & neosoul`;
+        $("#cards").innerHTML = MIXES.slice(0, 6)
+          .map(
+            (
+              m,
+              i,
+            ) => `<div class="card" data-play="${i}" role="button" tabindex="0">
+              <div class="card-art">${cover(m)}
+                <span class="play-btn">${icon("play")}</span>
+              </div>
+              <div class="card-title">${esc(m.title)}</div>
+              <div class="card-sub">${
+                m.songs
+                  ? esc(
+                      m.songs
+                        .slice(0, 3)
+                        .map((s) => s.split(" — ")[1] || s)
+                        .join(", "),
+                    )
+                  : "DJ Adjective"
+              }</div>
+            </div>`,
+          )
+          .join("");
+        $("#photos").innerHTML = PHOTOS.map(
+          (p) =>
+            `<div class="photo" data-full="${esc(p.src)}" data-alt="${esc(p.alt)}"><img src="${url(p.src)}" alt="${esc(p.alt)}" loading="lazy"/></div>`,
+        ).join("");
+      }
+
+      // ---------- Player ----------
+      const audio = new Audio();
+      audio.preload = "none";
+      let current = -1;
+      let shuffle = false;
+      let repeat = "off"; // off | all | one
+
+      function load(i, autoplay = true) {
+        current = i;
+        const m = MIXES[i];
+        audio.src = url(m.file);
+        $("#nowTitle").textContent = m.title;
+        $("#nowCover").outerHTML = cover(m).replace(
+          'class="cover ',
+          'id="nowCover" class="cover ',
+        );
+        $("#nowDownload").href = url(m.file);
+        document.title = `${m.title} · DJ Adjective`;
+        if ("mediaSession" in navigator) {
+          navigator.mediaSession.metadata = new MediaMetadata({
+            title: m.title,
+            artist: "DJ Adjective",
+            artwork: [
+              {
+                src: "CEA23100-A256-4E94-8520-2ED06DE266D8.jpg",
+                sizes: "512x512",
+                type: "image/jpeg",
+              },
+            ],
+          });
+        }
+        if (autoplay) audio.play().catch(() => {});
+        syncUI();
+      }
+
+      function playIndex(i) {
+        if (i === current) toggle();
+        else load(i);
+      }
+      function toggle() {
+        if (current < 0) return load(shuffle ? randomIndex() : 0);
+        audio.paused ? audio.play().catch(() => {}) : audio.pause();
+      }
+      function randomIndex() {
+        if (MIXES.length < 2) return 0;
+        let r;
+        do r = Math.floor(Math.random() * MIXES.length);
+        while (r === current);
+        return r;
+      }
+      function next(auto = false) {
+        if (current < 0) return load(0);
+        if (shuffle) return load(randomIndex());
+        if (current + 1 < MIXES.length) return load(current + 1);
+        if (repeat === "all" || !auto) return load(0);
+      }
+      function prev() {
+        if (audio.currentTime > 3 || current < 0) {
+          audio.currentTime = 0;
+          return;
+        }
+        load((current - 1 + MIXES.length) % MIXES.length);
+      }
+
+      function syncUI() {
+        const playing = !audio.paused;
+        $$("[data-row]").forEach((r) =>
+          r.classList.toggle("is-current", +r.dataset.row === current),
+        );
+        $$(".lib-item, .card").forEach((el) =>
+          el.classList.toggle("is-current", +el.dataset.play === current),
+        );
+        document.body.classList.toggle("paused", !playing);
+        const ic = (on) => icon(on ? "pause" : "play");
+        $$('[data-action="play-all"]').forEach(
+          (b) => (b.innerHTML = ic(playing)),
+        );
+        $('[data-action="toggle"]').innerHTML = ic(playing);
+        $('[data-action="toggle"]').setAttribute(
+          "aria-label",
+          playing ? "Pause" : "Play",
+        );
+        $$(".row.is-current .num-play").forEach(
+          (b) => (b.innerHTML = ic(playing)),
+        );
+        $$(".row:not(.is-current) .num-play").forEach(
+          (b) => (b.innerHTML = icon("play")),
+        );
+        $$(".card .play-btn").forEach(
+          (b) =>
+            (b.innerHTML = ic(
+              playing && +b.closest(".card").dataset.play === current,
+            )),
+        );
+        $$('[data-action="shuffle"]').forEach((b) =>
+          b.classList.toggle("on", shuffle),
+        );
+        const rb = $('[data-action="repeat"]');
+        rb.classList.toggle("on", repeat !== "off");
+        rb.title = { off: "Repeat off", all: "Repeat all", one: "Repeat one" }[
+          repeat
+        ];
+        rb.style.opacity = repeat === "one" ? "0.75" : "";
+      }
+
+      const seek = $("#seek");
+      const vol = $("#volume");
+      let seeking = false;
+      const setFill = (el) =>
+        el.style.setProperty("--p", (el.value / el.max) * 100 + "%");
+
+      audio.addEventListener("timeupdate", () => {
+        if (seeking || !audio.duration) return;
+        seek.value = (audio.currentTime / audio.duration) * 1000;
+        setFill(seek);
+        $("#timeCur").textContent = fmt(audio.currentTime);
       });
+      audio.addEventListener(
+        "loadedmetadata",
+        () => ($("#timeDur").textContent = fmt(audio.duration)),
+      );
+      audio.addEventListener("play", syncUI);
+      audio.addEventListener("pause", syncUI);
+      audio.addEventListener("ended", () => {
+        if (repeat === "one") {
+          audio.currentTime = 0;
+          audio.play();
+        } else next(true);
+      });
+
+      seek.addEventListener("input", () => {
+        seeking = true;
+        setFill(seek);
+        if (audio.duration)
+          $("#timeCur").textContent = fmt((seek.value / 1000) * audio.duration);
+      });
+      seek.addEventListener("change", () => {
+        if (audio.duration)
+          audio.currentTime = (seek.value / 1000) * audio.duration;
+        seeking = false;
+      });
+
+      let lastVol = 0.8;
+      function setVolume(v) {
+        audio.volume = v;
+        vol.value = Math.round(v * 100);
+        setFill(vol);
+        $('[data-action="mute"]').innerHTML = icon(v === 0 ? "mute" : "volume");
+      }
+      vol.addEventListener("input", () => setVolume(vol.value / 100));
+      setVolume(0.8);
+
+      if ("mediaSession" in navigator) {
+        navigator.mediaSession.setActionHandler("play", () => audio.play());
+        navigator.mediaSession.setActionHandler("pause", () => audio.pause());
+        navigator.mediaSession.setActionHandler("nexttrack", () => next());
+        navigator.mediaSession.setActionHandler("previoustrack", prev);
+      }
+
+      // ---------- Events ----------
+      async function share(m) {
+        const full = new URL(url(m.file), location.href).href;
+        if (navigator.share) {
+          try {
+            return await navigator.share({ title: m.title, url: full });
+          } catch (e) {}
+        }
+        try {
+          await navigator.clipboard.writeText(full);
+          alert("Link copied!");
+        } catch (e) {
+          prompt("Copy this link", full);
+        }
+      }
+
+      document.addEventListener("click", (e) => {
+        const t = e.target.closest(
+          "[data-play],[data-action],[data-songs],[data-share],.photo,[data-scroll]",
+        );
+        if (!t) return;
+        if (t.dataset.songs !== undefined) {
+          const i = t.dataset.songs;
+          const open = $(`#songs-${i}`).classList.toggle("open");
+          t.closest(".row").classList.toggle("open", open);
+          t.setAttribute("aria-expanded", open);
+        } else if (t.dataset.share !== undefined) {
+          share(MIXES[+t.dataset.share]);
+        } else if (t.dataset.play !== undefined) {
+          playIndex(+t.dataset.play);
+        } else if (t.classList.contains("photo")) {
+          $("#lightboxImg").src = url(t.dataset.full);
+          $("#lightboxImg").alt = t.dataset.alt;
+          $("#lightbox").showModal();
+        } else if (t.dataset.scroll) {
+          e.preventDefault();
+          $("#main").scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+          const a = t.dataset.action;
+          if (a === "play-all" || a === "toggle") toggle();
+          else if (a === "next") next();
+          else if (a === "prev") prev();
+          else if (a === "shuffle") ((shuffle = !shuffle), syncUI());
+          else if (a === "repeat")
+            ((repeat = { off: "all", all: "one", one: "off" }[repeat]),
+              syncUI());
+          else if (a === "mute") {
+            if (audio.volume > 0) ((lastVol = audio.volume), setVolume(0));
+            else setVolume(lastVol || 0.8);
+          }
+        }
+      });
+
+      // Double-click a row to play, like a desktop music app
+      $("#trackTable").addEventListener("dblclick", (e) => {
+        const row = e.target.closest("[data-row]");
+        if (row && !e.target.closest("button,a")) playIndex(+row.dataset.row);
+      });
+
+      $("#lightbox").addEventListener("click", () => $("#lightbox").close());
+
+      document.addEventListener("keydown", (e) => {
+        if (e.target.matches("input,textarea")) return;
+        if (e.code === "Space") {
+          e.preventDefault();
+          toggle();
+        } else if (e.key === "Enter" && e.target.classList.contains("card")) {
+          playIndex(+e.target.dataset.play);
+        }
+      });
+
+      function onSearch(e) {
+        const q = e.target.value.trim().toLowerCase();
+        $("#search").value = $("#searchMobile").value = e.target.value;
+        filtered = MIXES.map((m, i) => i).filter((i) => {
+          const m = MIXES[i];
+          return (
+            !q ||
+            m.title.toLowerCase().includes(q) ||
+            (m.songs || []).some((s) => s.toLowerCase().includes(q))
+          );
+        });
+        renderLists();
+      }
+      $("#search").addEventListener("input", onSearch);
+      $("#searchMobile").addEventListener("input", onSearch);
+
+      // Fade in the sticky top bar once the hero scrolls away
+      const main = $("#main");
+      main.addEventListener("scroll", () => {
+        const o = Math.min(1, Math.max(0, (main.scrollTop - 240) / 80));
+        main.style.setProperty("--top-o", o);
+        main.style.setProperty("--top-pe", o > 0.5 ? "auto" : "none");
+      });
+
+      renderStatic();
+      renderLists();
     </script>
   </body>
 </html>
